@@ -67,5 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Sigilo_Infiltracion_EquipoCansado.slnx"
+    "dotnet.defaultSolution": "Sigilo_Infiltracion_EquipoCansado.slnx",
+    "workbench.colorTheme": "Rubistyler Theme"
 }
