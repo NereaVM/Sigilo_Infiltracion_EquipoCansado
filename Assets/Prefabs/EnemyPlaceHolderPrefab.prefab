@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2367219799140659592}
+  - component: {fileID: 7812640656908150819}
+  - component: {fileID: 3174333086944724776}
   - component: {fileID: 664156783889126084}
   - component: {fileID: 730934031071509725}
   - component: {fileID: 6465121023299712528}
   - component: {fileID: 855120476475903544}
-  - component: {fileID: 7812640656908150819}
-  - component: {fileID: 3174333086944724776}
   m_Layer: 0
   m_Name: EnemyPlaceHolderPrefab
   m_TagString: Untagged
@@ -37,6 +37,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7812640656908150819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735586357144121417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e58c7f5d9dbe64285ad0cc3ad668d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPlaceholderScript
+  isDebugging: 0
+  currentState: 0
+  alertSoundPrefab: {fileID: 841157918145273127, guid: 2056b73a05addfa41b08ddad75befc74, type: 3}
+  moveSpeed: 20
+--- !u!114 &3174333086944724776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735586357144121417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431780526c3afd94cbedb1cfde4991e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HearingSense_PlaceholderEnemy
 --- !u!33 &664156783889126084
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -144,30 +172,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7812640656908150819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5735586357144121417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e58c7f5d9dbe64285ad0cc3ad668d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPlaceholderScript
-  moveSpeed: 20
-  isSearchingSound: 0
---- !u!114 &3174333086944724776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5735586357144121417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 431780526c3afd94cbedb1cfde4991e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HearingSense_PlaceholderEnemy
-  parentScript: {fileID: 0}
