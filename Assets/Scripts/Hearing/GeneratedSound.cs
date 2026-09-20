@@ -19,7 +19,7 @@ public class GeneratedSound : HearingSystem
         if (hearingSense == null) return;
         if (onlyHeardOncePerEntity && HasHeardAlready(hearingSense)) return;
 
-        hearingSense.HearSound(soundType);
+        hearingSense.HearSound(soundType, transform.position);
         Debug.Log("Tried to hear sound. [GeneratedSound][OnTriggerEnter]");
         
         if (onlyHeardOncePerEntity) affectedEntities.Add(hearingSense);

@@ -3,9 +3,9 @@ using UnityEngine;
 public abstract class HearingSense : HearingSystem
 {
 
-    MonoBehaviour parentScript;
+    public MonoBehaviour parentScript;
 
-    public virtual int HearSound(SoundType soundType)
+    public virtual int HearSound(SoundType soundType, Vector3 soundPosition)
     {
 
         int priority = GetPriority(soundType);
