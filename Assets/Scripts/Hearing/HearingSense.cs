@@ -2,14 +2,12 @@ using UnityEngine;
 
 public abstract class HearingSense : HearingSystem
 {
+    public bool hasHeardSound { get; set;}
+    public Vector3 lastSoundPosition { get; set;}
+    public SoundType lastSoundType { get; set;}
 
-    public MonoBehaviour parentScript;
-
-    public virtual int HearSound(SoundType soundType, Vector3 soundPosition)
+    public virtual void HearSound(SoundType soundType, Vector3 soundPosition)
     {
-
-        int priority = GetPriority(soundType);
-
         switch (soundType)
         {
             case SoundType.CommonSound:
@@ -26,15 +24,19 @@ public abstract class HearingSense : HearingSystem
                 break;
         }
 
-        return priority;
+        if (!hasHeardSound)
+        {
+            hasHeardSound = true;
+            lastSoundPosition = soundPosition;
+            lastSoundType = soundType;
+        }
 
     }
 
     public abstract int GetPriority(SoundType soundType);
 
-
-    public virtual void SetParentScript(MonoBehaviour script)
+    public void ResetHearing()
     {
-        parentScript = script;
+        hasHeardSound = false;
     }
 }

@@ -6,6 +6,7 @@ public class GeneratedSound : HearingSystem
     [SerializeField] private SoundType soundType;
     [SerializeField] private float duration; // Duration of the sound before dissapearing. -1 means infinite duration
     [SerializeField] private bool onlyHeardOncePerEntity = false; // If true, the sound will only be heard once by each entity. If false, it can be heard multiple times.
+    public HearingSense soundGenerator; // Reference to the HearingSense component that generated this sound for ignoring the sound generator itself. 
     private List<HearingSense> affectedEntities;
     void OnEnable()
     {
@@ -16,7 +17,7 @@ public class GeneratedSound : HearingSystem
     void OnTriggerEnter(Collider other)
     {
         HearingSense hearingSense = other.GetComponent<HearingSense>();
-        if (hearingSense == null) return;
+        if (hearingSense == null || hearingSense == soundGenerator) return;
         if (onlyHeardOncePerEntity && HasHeardAlready(hearingSense)) return;
 
         hearingSense.HearSound(soundType, transform.position);
@@ -37,5 +38,17 @@ public class GeneratedSound : HearingSystem
         }
 
         return false;
+    }
+
+    void OnDrawGizmos()
+    {
+        SphereCollider sphereCollider = GetComponentInChildren<SphereCollider>();
+        if (sphereCollider == null)
+        {
+            return;
+        }
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sphereCollider.radius * sphereCollider.transform.lossyScale.x);
     }
 }

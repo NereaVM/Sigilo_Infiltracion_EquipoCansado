@@ -28,23 +28,6 @@ public class CreateSoundOnKeyPress : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        if (soundPrefab == null)
-        {
-            return;
-        }
-
-        SphereCollider sphereCollider = soundPrefab.GetComponentInChildren<SphereCollider>();
-        if (sphereCollider == null)
-        {
-            return;
-        }
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(lastSpawnPosition, sphereCollider.radius * sphereCollider.transform.lossyScale.x);
-    }
-
     Vector3 RandomizeSpawnPosition()
     {
         return new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
