@@ -5,7 +5,7 @@ public class Launcher : MonoBehaviour
 {
     public Transform spawnPoint;
     public float pickupRange = 4f;
-    public float maxThrowDistance = 8f;
+    public float maxThrowDistance = 5f;
     public float throwForceMultiplier = 2.2f;
     public float upwardForce = 3.5f;
 
