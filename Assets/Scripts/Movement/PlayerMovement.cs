@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerEnergy))]
@@ -13,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private PlayerEnergy playerEnergy;
 
-    private InputAction moveAction;
+    private Vector2 movementInput;
 
     public bool IsMoving =>
-        moveAction.ReadValue<Vector2>().magnitude > 0.001f;
+        movementInput.sqrMagnitude > 0.001f;
 
     private void Awake()
     {
@@ -32,11 +31,6 @@ public class PlayerMovement : MonoBehaviour
             RigidbodyConstraints.FreezeRotationZ;
     }
 
-    private void Start()
-    {
-        moveAction = InputSystem.actions.FindAction("Move");
-    }
-
     private void Update()
     {
         if (IsMoving)
@@ -50,18 +44,22 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
+    public void SetMovementInput(Vector2 input)
+    {
+        // Evita aumentar la velocidad al moverse en diagonal.
+        movementInput = Vector2.ClampMagnitude(input, 1f);
+    }
+
     private void Move()
     {
-
-        if (!IsMoving)
-            return;
-
         Vector3 direction = new Vector3(
-            moveAction.ReadValue<Vector2>().x,
+            movementInput.x,
             0f,
-            moveAction.ReadValue<Vector2>().y
-        ).normalized;
-        Debug.Log($"direction = {direction} [PlayerMovement][Move]");
+            movementInput.y
+        );
+
+        if (direction.sqrMagnitude < 0.001f)
+            return;
 
         // Energía 100% -> velocidad máxima.
         // Energía 0%   -> velocidad mínima.
