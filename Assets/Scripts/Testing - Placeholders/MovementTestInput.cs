@@ -30,6 +30,6 @@ public class MovementTestInput : MonoBehaviour
         if (Keyboard.current.dKey.isPressed)
             input.x += 1f;
 
-        playerMovement.SetMovementInput(input);
+        //playerMovement.SetMovementInput(input);
     }
 }
