@@ -538,7 +538,7 @@ Transform:
   m_GameObject: {fileID: 964298774}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.14472, y: 0.61, z: 3.01644}
+  m_LocalPosition: {x: -3.37, y: 0.61, z: -5.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 1134239156}
   - component: {fileID: 1134239160}
   - component: {fileID: 1134239162}
-  - component: {fileID: 1134239161}
+  - component: {fileID: 1134239163}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -688,24 +688,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &1134239161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134239154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb3225c120703d40be104cd1da62660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Steering_Arrive
-  maxSteeringForce: 0
-  target: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
-  arriveDistance: 5
-  slowingDistance: 10
-  timeToTarget: 0.1
 --- !u!114 &1134239162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +702,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SteeringBehaviourTester
   target: {fileID: 964298778}
   maxSteeringForce: 50
-  maxLinearVelocity: 30
+  maxLinearVelocity: 50
+--- !u!114 &1134239163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134239154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1de84f90ff5ab940a80c0b35b1dcdf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Seek_Crocodile
+  maxSteeringForce: 0
+  target: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+  minSteeringForce: 10
+  TimeToMaxForce: 2
+  accelerationMaxAngle: 10
 --- !u!1 &2009175160
 GameObject:
   m_ObjectHideFlags: 0

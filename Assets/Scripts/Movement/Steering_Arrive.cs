@@ -52,7 +52,7 @@ public class Steering_Arrive : MovementScript
         desiredVelocityVector.Normalize();
         desiredVelocityVector *= targetSpeed;
 
-        // 
+        // Get the steering vector and ensure it is reached within the time to target speed
         Vector3 steeringVector = desiredVelocityVector - rb.linearVelocity;
         steeringVector /= timeToTargetSpeed;
 
