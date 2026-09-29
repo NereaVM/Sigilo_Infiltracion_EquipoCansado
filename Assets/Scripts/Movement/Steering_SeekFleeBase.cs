@@ -2,11 +2,6 @@ using UnityEngine;
 
 public abstract class Steering_SeekFlee : MovementScript
 {
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
     void FixedUpdate()
     {
         OnUpdate();

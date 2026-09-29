@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class Steering_Seek : Steering_SeekFlee
 {
+
+    void Update(){
+        if (targetTransform != null)
+        {
+            target = targetTransform.position;
+        }
+    }
     public override void OnUpdate()
     {
         rb.AddForce(Seek(target), ForceMode.Acceleration);

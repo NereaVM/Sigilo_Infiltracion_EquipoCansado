@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Seek_Crocodile : Steering_Seek
+public class Crocodile_Pursue : Steering_Pursue
 {
     private float currentForceCap = 0f;
     public float minSteeringForce = 0.1f; // The minimum steering force that the crocodile can apply
@@ -11,23 +11,23 @@ public class Seek_Crocodile : Steering_Seek
     // Applies the custom acceleration system of the crocodile to the Seek behaviour.
     public override void OnUpdate()
     {
-        Vector3 steering = Seek(target);
-        float currentAngle = Vector3.Angle(rb.linearVelocity, target - rb.position); // Calculate the angle between the current velocity and the target position
+        Vector3 steering = Pursue(target);
+        float currentAngle = Vector3.Angle(rb.linearVelocity, target - rb.position);
         if (currentAngle < accelerationMaxAngle)
         {
-            accelerationDuration += Time.deltaTime; // Increase the acceleration duration
+            accelerationDuration += Time.deltaTime;
 
-            currentForceCap = CalculateCurrentForceCap(accelerationDuration); // Calculate the current force cap based on the acceleration duration
+            currentForceCap = CalculateCurrentForceCap(accelerationDuration); 
         }
-        else if (currentAngle < 60f)
+        else if (currentAngle < 100f)
         {
-            accelerationDuration = 0f; // Reset the acceleration duration
-            currentForceCap = Mathf.Lerp(minSteeringForce, maxSteeringForce/2, currentAngle/60f); // Set the current force cap to the maximum steering force
+            accelerationDuration = 0f;
+            currentForceCap = Mathf.Lerp(minSteeringForce/2, maxSteeringForce/2, currentAngle/100f);
         }
         else
         {
-            accelerationDuration = 0f; // Reset the acceleration duration
-            currentForceCap = maxSteeringForce*2; // Set the current force cap to the minimum steering force
+            accelerationDuration = 0f;
+            currentForceCap = maxSteeringForce;
         }
         steering = Vector3.ClampMagnitude(steering, currentForceCap); // Clamp the steering force to the current force cap
 
@@ -43,5 +43,11 @@ public class Seek_Crocodile : Steering_Seek
         multiplier = Mathf.Clamp01(multiplier);
         
         return maxSteeringForce * multiplier; // Ensure the force cap is not below the minimum steering force
+    }
+
+    void OnDrawGizmos(){
+        if (rb == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(rb.position, rb.linearVelocity + rb.position);
     }
 }

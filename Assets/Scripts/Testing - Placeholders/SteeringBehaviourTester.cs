@@ -20,12 +20,14 @@ public class SteeringBehaviourTester : MonoBehaviour
         {
             Debug.LogError("No Rigidbody found on this GameObject.");
         }
+        
+        movementScript.targetTransform = target;
     }
 
     void Update()
     {
         rb.maxLinearVelocity = maxLinearVelocity;
         movementScript.maxSteeringForce = maxSteeringForce;
-        movementScript.target = target.position;
+        movementScript.rb = rb;
     }
 }

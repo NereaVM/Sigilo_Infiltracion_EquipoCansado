@@ -5,9 +5,12 @@ public class Steering_Arrive : MovementScript
     public float arriveDistance = 1f;
     public float slowingDistance = 5f;
     public float timeToTargetSpeed = 0.1f;
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
+
+    void Update(){
+        if (targetTransform != null)
+        {
+            target = targetTransform.position;
+        }
     }
 
     void FixedUpdate()
@@ -15,7 +18,7 @@ public class Steering_Arrive : MovementScript
         OnUpdate();
     }
 
-    public void OnUpdate()
+    public virtual void OnUpdate()
     {
         rb.AddForce(Arrive(target), ForceMode.Acceleration);
     }
