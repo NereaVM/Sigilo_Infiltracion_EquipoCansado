@@ -5,19 +5,6 @@ public class Steering_Arrive : MovementScript
     public float arriveDistance = 1f;
     public float slowingDistance = 5f;
     public float timeToTargetSpeed = 0.1f;
-
-    void Update(){
-        if (targetTransform != null)
-        {
-            target = targetTransform.position;
-        }
-    }
-
-    void FixedUpdate()
-    {
-        OnUpdate();
-    }
-
     public override void OnUpdate()
     {
         rb.AddForce(Arrive(target), ForceMode.Acceleration);
