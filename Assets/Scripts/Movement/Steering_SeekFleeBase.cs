@@ -4,6 +4,10 @@ public abstract class Steering_SeekFlee : MovementScript
 {
     void FixedUpdate()
     {
+        if (targetTransform != null)
+        {
+            target = targetTransform.position;
+        }
         OnUpdate();
     }
 
