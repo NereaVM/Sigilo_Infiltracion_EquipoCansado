@@ -2,14 +2,7 @@ using UnityEngine;
 
 public abstract class Steering_SeekFlee : MovementScript
 {
-    void FixedUpdate()
-    {
-        if (targetTransform != null)
-        {
-            target = targetTransform.position;
-        }
-        OnUpdate();
-    }
+
 
     public Vector3 GetSteering(Vector3 desiredVelocityVector)
     {
