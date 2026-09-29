@@ -7,4 +7,5 @@ public abstract class MovementScript : MonoBehaviour
     public Vector3 target;
     public Rigidbody rb;
 
+    public abstract void OnUpdate();
 }

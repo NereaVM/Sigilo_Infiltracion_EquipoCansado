@@ -18,7 +18,7 @@ public class Steering_Arrive : MovementScript
         OnUpdate();
     }
 
-    public virtual void OnUpdate()
+    public override void OnUpdate()
     {
         rb.AddForce(Arrive(target), ForceMode.Acceleration);
     }

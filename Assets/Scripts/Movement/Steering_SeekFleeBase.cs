@@ -11,9 +11,6 @@ public abstract class Steering_SeekFlee : MovementScript
         OnUpdate();
     }
 
-    public abstract void OnUpdate();
-
-
     public Vector3 GetSteering(Vector3 desiredVelocityVector)
     {
         // We want to move in the direction of the desired velocity vector at max speed,
