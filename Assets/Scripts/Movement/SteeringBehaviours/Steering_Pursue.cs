@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Steering_Pursue : Steering_Arrive
@@ -6,12 +7,20 @@ public class Steering_Pursue : Steering_Arrive
     private Rigidbody targetRb;
     private Vector3 targetVelocity = Vector3.zero;
     private Vector3 pursuitTarget = Vector3.zero;
-    
+    private Vector3 previousTargetPosition;
+
     void Start()
     {
-        if(targetTransform != null) targetTransform.GetComponent<Rigidbody>();
+        if(targetTransform != null)
+        {
+            // Store the target Rigidbody reference.
+            targetRb = targetTransform.GetComponent<Rigidbody>();
+
+            // Store the initial target position.
+            previousTargetPosition = targetTransform.position;
+        }
     }
-    
+
     public override void OnUpdate()
     {
         rb.AddForce(Pursue(target), ForceMode.Acceleration);
@@ -46,13 +55,31 @@ public class Steering_Pursue : Steering_Arrive
     {
         if (targetRb != null)
         {
-            targetVelocity = targetRb.linearVelocity;
+            // Calculate velocity for kinematic targets.
+            if (targetRb.isKinematic)
+            {
+                targetVelocity =
+                    (targetTransform.position - previousTargetPosition)
+                    / Time.fixedDeltaTime;
+            }
+            else
+            {
+                targetVelocity = targetRb.linearVelocity;
+            }
+
             Debug.Log("SUCCESS");
         }
         else
         {
             targetVelocity = Vector3.zero;
         }
+
+        // Update the previous target position.
+        if (targetTransform != null)
+        {
+            previousTargetPosition = targetTransform.position;
+        }
+
         Debug.Log($"Target Velocity: {targetVelocity.magnitude}, Current Target Position: {target}");
     }
 
