@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MovementScript : MonoBehaviour
+public abstract class SteeringBehaviour : MonoBehaviour
 {
     public float maxSteeringForce;
     public Transform targetTransform;
