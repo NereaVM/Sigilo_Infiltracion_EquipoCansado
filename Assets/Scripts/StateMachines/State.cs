@@ -12,10 +12,19 @@ using UnityEngine;
 /// </remarks>
 public abstract class State : MonoBehaviour
 {
+    private void Awake()
+    {
+        // Disable all of the movement scripts on this state, as they should only be enabled when the state is active.
+        foreach (var movementScript in movementScripts)
+        {
+            movementScript.enabled = false;
+        }
+    }
     /// <summary>
     ///     Actions to perform when transitioning from the previous state to this one.
     /// </summary>
-    public abstract void OnEnter();
+    public abstract void OnEntry();
+    
     /// <summary>
     ///     Actions to perform on the Update loop.
     /// </summary>
@@ -42,19 +51,9 @@ public abstract class State : MonoBehaviour
         return transitions;
     }
 
-
     /// <summary>
-    ///     MovementScript that will control the movement of the NPC while in this state.
+    ///     MovementScripts that will control the movement of the NPC while in this state.
     /// </summary>
-    /// <remarks>
-    ///     In the current implementation, only one MovementScript can be assigned to a state, <br/>
-    ///     as the Align behaviour is expected to be used in every state.
-    /// </remarks>
-    public MovementScript movementScript;
-    public MovementScript GetMovementScript()
-    {
-        return movementScript;
-    }
-    public MovementSystemController movementSystemController;
+    public MovementScript[] movementScripts;
     
 }

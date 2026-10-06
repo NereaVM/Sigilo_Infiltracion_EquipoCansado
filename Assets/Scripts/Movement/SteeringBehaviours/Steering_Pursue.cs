@@ -7,11 +7,6 @@ public class Steering_Pursue : Steering_Arrive
     private Vector3 targetVelocity = Vector3.zero;
     private Vector3 pursuitTarget = Vector3.zero;
     
-    void Start()
-    {
-        if(targetTransform != null) targetTransform.GetComponent<Rigidbody>();
-    }
-    
     public override void OnUpdate()
     {
         rb.AddForce(Pursue(target), ForceMode.Acceleration);

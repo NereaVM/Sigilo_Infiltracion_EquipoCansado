@@ -21,7 +21,7 @@ public class SteeringBehaviourTester : MonoBehaviour
             Debug.LogError("No Rigidbody found on this GameObject.");
         }
         
-        movementScript.targetTransform = target;
+        //movementScript.targetTransform = target;
     }
 
     void Update()
