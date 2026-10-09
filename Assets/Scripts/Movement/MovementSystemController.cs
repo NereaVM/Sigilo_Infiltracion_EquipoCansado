@@ -62,6 +62,11 @@ public class MovementSystemController : MonoBehaviour
         {
             if (!activeMovementScripts.Contains(newScript)) EnableMovementScript(newScript);
         }
+
+        foreach (var movementScript in activeMovementScripts)
+        {
+            movementScript.targetTransform = currentTargetTransform;
+        }
     }
 
     public void SetNewTarget(Vector3 newTarget)
