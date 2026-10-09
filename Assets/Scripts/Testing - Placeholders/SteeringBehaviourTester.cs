@@ -5,12 +5,12 @@ public class SteeringBehaviourTester : MonoBehaviour
     public Transform target;
     public float maxSteeringForce = 10f;
     public float maxLinearVelocity = 5f;
-    private MovementScript movementScript;
+    private SteeringBehaviour movementScript;
     private Rigidbody rb;
 
     void Start()
     {
-        movementScript = GetComponent<MovementScript>();
+        movementScript = GetComponent<SteeringBehaviour>();
         if (movementScript == null)
         {
             Debug.LogError("No MovementScript found on this GameObject.");
@@ -21,7 +21,7 @@ public class SteeringBehaviourTester : MonoBehaviour
             Debug.LogError("No Rigidbody found on this GameObject.");
         }
         
-        movementScript.targetTransform = target;
+        //movementScript.targetTransform = target;
     }
 
     void Update()
