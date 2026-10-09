@@ -12,6 +12,14 @@ using UnityEngine;
 /// </remarks>
 public abstract class State : MonoBehaviour
 {
+    private StateMachine stateMachine;
+    public void SetStateMachine(StateMachine stateMachine)
+    {
+        this.stateMachine = stateMachine;
+    }
+    private HearingSense hearingSense;
+    private VisionSense visionSense;
+
     private void Awake()
     {
         // Disable all of the movement scripts on this state, as they should only be enabled when the state is active.
@@ -24,6 +32,13 @@ public abstract class State : MonoBehaviour
     ///     Actions to perform when transitioning from the previous state to this one.
     /// </summary>
     public abstract void OnEntry();
+    public void _OnEntry()
+    {
+        foreach (Transition transition in transitions)
+        {
+            transition.SetStateMachine(stateMachine);
+        }
+    }
     
     /// <summary>
     ///     Actions to perform on the Update loop.

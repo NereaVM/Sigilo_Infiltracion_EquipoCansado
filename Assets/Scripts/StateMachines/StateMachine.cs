@@ -5,25 +5,27 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     [Tooltip("The GameObject that holds the states for this state machine.")]
-    [SerializeField] private GameObject stateHolder;
     [SerializeField] private State initialState;
+    public HearingSense hearingSense { get; private set; }
+    public VisionSense visionSense { get; private set; }
     private MovementSystemController movementSystemController;
     private State currentState;
 
     private void Awake()
-    {
-        // Assume the GameObject that holds the states is self.
-        // We allow for it to be a different GameObject in case the states are organized in a different hierarchy.
-        if (stateHolder == null) stateHolder = this.gameObject;
-        
+    {   
         movementSystemController = GetComponent<MovementSystemController>();
-        
+        // Ensure we are looking for the Hearing and Vision components in this gameObject,
+        // if they are not found, they should be manually added in the inspector or assumed to be kept null.
+        _ = hearingSense == null ? hearingSense = GetComponent<HearingSense>() : hearingSense = hearingSense;
+        _ = visionSense == null ? visionSense = GetComponent<VisionSense>() : visionSense = visionSense;
+        visionSense = GetComponent<VisionSense>();
     }
 
     private void Start()
     {
         // Assign the initial state to the current state and call its OnEnter method
         currentState = initialState;
+        currentState.SetStateMachine(this);
         if (currentState == null) throw new Exception("Initial state is not set. Please assign an initial state in the inspector.");
         currentState.OnEntry();
     }
@@ -35,10 +37,10 @@ public class StateMachine : MonoBehaviour
     private void ApplyTransition(Transition transition)
     {
         currentState.OnExit();
-        transition.TransitionAction();
+        transition._TransitionAction();
         currentState = transition.GetTargetState();
-        movementSystemController.ChangeToMovementScripts(currentState.movementScripts);        
-        currentState.OnEntry();
+        movementSystemController?.ChangeToMovementScripts(currentState.movementScripts);        
+        currentState._OnEntry();
     }
 
     private void CheckTransitions()

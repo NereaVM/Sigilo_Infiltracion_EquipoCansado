@@ -27,7 +27,7 @@ public class MovementSystemController : MonoBehaviour
         {
             activeMovementScripts.Remove(movementScript);
         }
-        movementScript.enabled = false;
+        //movementScript.enabled = false;
     }
 
     private void EnableMovementScript(MovementScript movementScript)
@@ -36,7 +36,7 @@ public class MovementSystemController : MonoBehaviour
         {
             activeMovementScripts.Add(movementScript);
         }
-        movementScript.enabled = true;
+        //movementScript.enabled = true;
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ public class MovementSystemController : MonoBehaviour
     ///    Calls the OnUpdate() method of all active MovementScripts <br/>
     ///    and updates their target. 
     /// </summary>
-    public virtual void UpdateMovementScripts()
+    public virtual void UpdateActiveMovementScripts()
     {
         foreach (var movementScript in activeMovementScripts)
         {
@@ -93,7 +93,7 @@ public class MovementSystemController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateMovementScripts();
+        UpdateActiveMovementScripts();
     }
 
 }

@@ -9,6 +9,12 @@ using UnityEngine;
 /// </remarks>
 public abstract class Transition : MonoBehaviour
 {
+    public StateMachine stateMachine;
+    public void SetStateMachine(StateMachine stateMachine)
+    {
+        this.stateMachine = stateMachine;
+    }
+
     /// <summary>
     ///     Check if the transition condition is triggered.
     /// </summary>
@@ -34,4 +40,9 @@ public abstract class Transition : MonoBehaviour
     ///    but this method is provided for cases where the action is specific to the transition itself.
     /// </remarks>
     public virtual void TransitionAction(){}
+    public void _TransitionAction()
+    {
+        targetState.SetStateMachine(stateMachine);
+        TransitionAction();
+    }
 }
