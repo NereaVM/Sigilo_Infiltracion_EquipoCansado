@@ -1,0 +1,306 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6817581590200123136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6015543071577089732}
+  - component: {fileID: 8186879872736670738}
+  - component: {fileID: 5094462194753890379}
+  - component: {fileID: 4893621931420314739}
+  - component: {fileID: 5251299510897397874}
+  - component: {fileID: 3082229811089738609}
+  - component: {fileID: 314529948675376363}
+  - component: {fileID: 9144353100978523164}
+  - component: {fileID: 2583339005306742383}
+  m_Layer: 0
+  m_Name: Jabato
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6015543071577089732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8166644908143767413}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &8186879872736670738
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 1
+  m_AngularDamping: 2
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!136 &5094462194753890379
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.26
+  m_Height: 0.9
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.264, z: 0.12}
+--- !u!114 &4893621931420314739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949b4763d02745c43bd8873e6c02d97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleMovementAnimator_NPC_Jabali_Jabato_Cocodrilo
+  animator: {fileID: 8166644908136824981}
+  rb: {fileID: 8186879872736670738}
+  idleState: Idle
+  walkState: Walk
+  runState: Run
+  movementThreshold: 0.02
+  runThreshold: 2.75
+  walkReferenceSpeed: 2
+  runReferenceSpeed: 3
+  minAnimationSpeed: 0.65
+  maxAnimationSpeed: 1.5
+  transitionDuration: 0.1
+--- !u!114 &5251299510897397874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff66ec98ce3b7f543838a5ded8a1336c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Steering_Face
+  maxSteeringForce: 0
+  targetTransform: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+  rb: {fileID: 8186879872736670738}
+  maxAngularAcceleration: 8
+  maxRotation: 3
+  targetRadius: 2
+  slowRadius: 45
+  timeToTarget: 0.1
+--- !u!114 &3082229811089738609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa537a0b21ce7a41a9c9c16a9c991ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Steering_Pursue
+  maxSteeringForce: 8
+  targetTransform: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+  rb: {fileID: 8186879872736670738}
+  arriveDistance: 1
+  slowingDistance: 5
+  timeToTargetSpeed: 0.1
+  maxPredictionTime: 2
+--- !u!114 &314529948675376363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7eeaca3baa818c4eb7478e483a912f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Steering_Wander
+  maxSteeringForce: 5
+  targetTransform: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+  rb: {fileID: 8186879872736670738}
+  maxAngularAcceleration: 8
+  maxRotation: 3
+  targetRadius: 2
+  slowRadius: 45
+  timeToTarget: 0.1
+  wanderOffset: 2.04
+  wanderRadius: 1.5
+  wanderRate: 90
+  maxWanderSpeed: 2.5
+--- !u!114 &9144353100978523164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb3225c120703d40be104cd1da62660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Steering_Arrive
+  maxSteeringForce: 8
+  targetTransform: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+  rb: {fileID: 8186879872736670738}
+  arriveDistance: 1
+  slowingDistance: 5
+  timeToTargetSpeed: 0.1
+--- !u!114 &2583339005306742383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817581590200123136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ace5f28f15c331439ee8c8b39eef407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoarSteeringController
+  currentMode: 0
+  wander: {fileID: 314529948675376363}
+  pursue: {fileID: 3082229811089738609}
+  arrive: {fileID: 3082229811089738609}
+  face: {fileID: 5251299510897397874}
+  player: {fileID: 0}
+  boarDenTarget: {fileID: 0}
+  orderTarget: {fileID: 0}
+  pursuitSpeed: 3
+  returnSpeed: 2.5
+--- !u!1001 &4488001063594298179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6015543071577089732}
+    m_Modifications:
+    - target: {fileID: 5700806669406211030, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d5282c0c6feee944c9211b3f655f5769, type: 2}
+    - target: {fileID: 5700806669415741462, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_Name
+      value: BoarA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+--- !u!95 &8166644908136824981 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5700806669406211030, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+  m_PrefabInstance: {fileID: 4488001063594298179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8166644908143767413 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5700806669415769142, guid: 4dac15670cfbb5c4bb7ed8c6ebc082c4, type: 3}
+  m_PrefabInstance: {fileID: 4488001063594298179}
+  m_PrefabAsset: {fileID: 0}
