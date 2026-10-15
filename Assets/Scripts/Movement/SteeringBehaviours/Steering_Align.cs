@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Steering_Align : SteeringBehaviour
+public class Steering_Align : MovementScript
 {
     [Header("Angular Movement")]
     public float maxAngularAcceleration = 8f;

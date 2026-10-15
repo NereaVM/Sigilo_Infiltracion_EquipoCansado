@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Steering_Arrive : SteeringBehaviour
+public class Steering_Arrive : MovementScript
 {
     public float arriveDistance = 1f;
     public float slowingDistance = 5f;
