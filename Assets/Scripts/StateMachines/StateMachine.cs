@@ -27,7 +27,7 @@ public class StateMachine : MonoBehaviour
         currentState = initialState;
         currentState.SetStateMachine(this);
         if (currentState == null) throw new Exception("Initial state is not set. Please assign an initial state in the inspector.");
-        currentState.OnEntry();
+        currentState._OnEntry();
     }
 
     /// <summary>

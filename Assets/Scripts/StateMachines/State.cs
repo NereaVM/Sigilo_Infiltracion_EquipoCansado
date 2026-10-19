@@ -38,6 +38,8 @@ public abstract class State : MonoBehaviour
         {
             transition.SetStateMachine(stateMachine);
         }
+
+        OnEntry();
     }
     
     /// <summary>
