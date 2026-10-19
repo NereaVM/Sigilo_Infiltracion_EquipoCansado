@@ -6,41 +6,97 @@ public class StateMachine : MonoBehaviour
 {
     [Tooltip("The GameObject that holds the states for this state machine.")]
     [SerializeField] private State initialState;
+
+    [Header("Debug")]
+    [SerializeField] private string currentStateName;
+
     public HearingSense hearingSense { get; private set; }
     public VisionSense visionSense { get; private set; }
+
     private MovementSystemController movementSystemController;
     private State currentState;
 
     private void Awake()
-    {   
+    {
         movementSystemController = GetComponent<MovementSystemController>();
-        // Ensure we are looking for the Hearing and Vision components in this gameObject,
-        // if they are not found, they should be manually added in the inspector or assumed to be kept null.
-        _ = hearingSense == null ? hearingSense = GetComponent<HearingSense>() : hearingSense = hearingSense;
-        _ = visionSense == null ? visionSense = GetComponent<VisionSense>() : visionSense = visionSense;
-        visionSense = GetComponent<VisionSense>();
+
+        // Ensure we are looking for the Hearing and Vision components
+        // in this GameObject.
+        if (hearingSense == null)
+        {
+            hearingSense = GetComponent<HearingSense>();
+        }
+
+        if (visionSense == null)
+        {
+            visionSense = GetComponent<VisionSense>();
+        }
     }
 
     private void Start()
     {
-        // Assign the initial state to the current state and call its OnEnter method
+        // Assign the initial state.
         currentState = initialState;
+
+        // Check before using it.
+        if (currentState == null)
+        {
+            throw new Exception(
+                "Initial state is not set. Please assign an initial state in the inspector."
+            );
+        }
+
+        // Give the state access to this StateMachine.
         currentState.SetStateMachine(this);
-        if (currentState == null) throw new Exception("Initial state is not set. Please assign an initial state in the inspector.");
-        currentState.OnEntry();
+
+        // Configure the movement scripts of the initial state.
+        movementSystemController.ChangeToMovementScripts(
+            currentState.movementScripts
+        );
+
+        // _OnEntry also calls the specific OnEntry().
+        currentState._OnEntry();
+
+        UpdateCurrentStateDebug();
     }
 
     /// <summary>
-    ///     Applies the transition to the target state, calling the exit method of the current state, <br/>
-    ///     the transition action, and the enter method of the target state.
+    /// Applies the transition to the target state.
     /// </summary>
     private void ApplyTransition(Transition transition)
     {
+        State previousState = currentState;
+
+        // Exit the current state.
         currentState.OnExit();
+
+        // Execute the transition-specific action.
         transition._TransitionAction();
+
+        // Change to the target state.
         currentState = transition.GetTargetState();
-        movementSystemController?.ChangeToMovementScripts(currentState.movementScripts);        
+
+        if (currentState == null)
+        {
+            throw new Exception(
+                "Transition target state is null."
+            );
+        }
+
+        // Configure the movement scripts required by the new state.
+        movementSystemController.ChangeToMovementScripts(
+            currentState.movementScripts
+        );
+
+        // _OnEntry also calls the specific OnEntry().
         currentState._OnEntry();
+
+        UpdateCurrentStateDebug();
+
+        Debug.Log(
+            $"[STATE MACHINE] {gameObject.name}: " +
+            $"{previousState.gameObject.name} -> {currentState.gameObject.name}"
+        );
     }
 
     private void CheckTransitions()
@@ -48,8 +104,6 @@ public class StateMachine : MonoBehaviour
         // Check if any of the transitions from the current state are triggered.
         foreach (var transition in currentState.GetTransitions())
         {
-            // If the condition for a transition is met, apply the transition and break out of the loop.
-            // Applies only the first transition that is triggered, as transitions are prioritized by their order in the array in State.
             if (transition.IsTriggered())
             {
                 ApplyTransition(transition);
@@ -60,14 +114,28 @@ public class StateMachine : MonoBehaviour
 
     private void Update()
     {
-        if (currentState == null) throw new Exception("Current state is null. Ensure that the initial state is set and that transitions are properly configured.");
+        if (currentState == null)
+        {
+            throw new Exception(
+                "Current state is null. Ensure that the initial state is set " +
+                "and that transitions are properly configured."
+            );
+        }
 
-        // Check if any of the transitions from the current state are triggered.
         CheckTransitions();
 
-        // If no transitions are triggered, continue updating the current state.
         currentState.OnUpdate();
     }
 
+    private void UpdateCurrentStateDebug()
+    {
+        currentStateName =
+            currentState != null
+            ? currentState.gameObject.name
+            : "None";
 
+        Debug.Log(
+            $"[STATE MACHINE] {gameObject.name} current state: {currentStateName}"
+        );
+    }
 }
