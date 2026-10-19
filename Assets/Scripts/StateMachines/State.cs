@@ -20,14 +20,6 @@ public abstract class State : MonoBehaviour
     private HearingSense hearingSense;
     private VisionSense visionSense;
 
-    private void Awake()
-    {
-        // Disable all of the movement scripts on this state, as they should only be enabled when the state is active.
-        foreach (var movementScript in movementScripts)
-        {
-            movementScript.enabled = false;
-        }
-    }
     /// <summary>
     ///     Actions to perform when transitioning from the previous state to this one.
     /// </summary>

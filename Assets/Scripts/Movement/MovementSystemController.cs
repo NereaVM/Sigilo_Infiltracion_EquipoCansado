@@ -27,7 +27,6 @@ public class MovementSystemController : MonoBehaviour
         {
             activeMovementScripts.Remove(movementScript);
         }
-        //movementScript.enabled = false;
     }
 
     private void EnableMovementScript(MovementScript movementScript)
@@ -36,7 +35,6 @@ public class MovementSystemController : MonoBehaviour
         {
             activeMovementScripts.Add(movementScript);
         }
-        //movementScript.enabled = true;
     }
 
     /// <summary>

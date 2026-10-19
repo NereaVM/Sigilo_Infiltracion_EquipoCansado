@@ -25,8 +25,9 @@ public class StateMachine : MonoBehaviour
     {
         // Assign the initial state to the current state and call its OnEnter method
         currentState = initialState;
-        currentState.SetStateMachine(this);
         if (currentState == null) throw new Exception("Initial state is not set. Please assign an initial state in the inspector.");
+        movementSystemController?.ChangeToMovementScripts(currentState.movementScripts);
+        currentState.SetStateMachine(this);
         currentState._OnEntry();
     }
 
