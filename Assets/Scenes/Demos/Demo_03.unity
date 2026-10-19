@@ -12239,6 +12239,10 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: 160
       objectReference: {fileID: 0}
+    - target: {fileID: 491277737024586064, guid: ac377b0ce221b4d40a7e4d47d5f15840, type: 3}
+      propertyPath: 'transitions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1976562394}
     - target: {fileID: 1048279330033391999, guid: ac377b0ce221b4d40a7e4d47d5f15840, type: 3}
       propertyPath: m_Name
       value: BuhoBlanco
@@ -12339,6 +12343,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3832269739635342427, guid: ac377b0ce221b4d40a7e4d47d5f15840, type: 3}
+      propertyPath: visionPivot
+      value: 
+      objectReference: {fileID: 880508996}
     - target: {fileID: 5455153115227536222, guid: ac377b0ce221b4d40a7e4d47d5f15840, type: 3}
       propertyPath: visionPivot
       value: 
@@ -15282,6 +15290,17 @@ Transform:
   - {fileID: 1302098830}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1976562394 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3643099314822710368, guid: ac377b0ce221b4d40a7e4d47d5f15840, type: 3}
+  m_PrefabInstance: {fileID: 1662431051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4578ec251566d458a598551619145e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_Vision
 --- !u!1 &1984906387
 GameObject:
   m_ObjectHideFlags: 0
