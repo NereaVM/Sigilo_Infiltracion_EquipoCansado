@@ -36,10 +36,9 @@ public class SimpleMovementAnimator_NPC_Buho : MonoBehaviour
         if (animator == null || rb == null)
             return;
 
-        Vector3 horizontalVelocity = rb.linearVelocity;
-        horizontalVelocity.y = 0f;
+        // Full 3D velocity: vertical flight also counts as movement.
+        float speed = rb.linearVelocity.magnitude;
 
-        float speed = horizontalVelocity.magnitude;
         bool shouldMove = speed > movementThreshold;
 
         if (shouldMove != isMoving)
@@ -47,7 +46,9 @@ public class SimpleMovementAnimator_NPC_Buho : MonoBehaviour
             isMoving = shouldMove;
 
             if (isMoving)
+            {
                 animator.CrossFade(movingState, transitionDuration);
+            }
             else
             {
                 animator.speed = 1f;
