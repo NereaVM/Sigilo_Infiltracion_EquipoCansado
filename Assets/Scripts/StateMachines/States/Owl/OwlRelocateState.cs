@@ -12,7 +12,7 @@ public class OwlRelocateState : State
 
     [Header("References")]
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private VisionSense visionSense;
+    [SerializeField] private VisionSense owlVisionSense;
     [SerializeField] private Light visionLight;
 
     [Header("Waypoints")]
@@ -42,7 +42,9 @@ public class OwlRelocateState : State
     {
         HasFinished = false;
 
-        if (rb == null || flightWaypoints == null || flightWaypoints.Length == 0)
+        if (rb == null ||
+            flightWaypoints == null ||
+            flightWaypoints.Length == 0)
         {
             HasFinished = true;
             return;
@@ -60,10 +62,10 @@ public class OwlRelocateState : State
         rb.useGravity = false;
         rb.linearVelocity = Vector3.zero;
 
-        if (visionSense != null)
+        if (owlVisionSense != null)
         {
-            previousVisionEnabled = visionSense.enabled;
-            visionSense.SetVisionEnabled(false);
+            previousVisionEnabled = owlVisionSense.enabled;
+            owlVisionSense.SetVisionEnabled(false);
         }
 
         if (visionLight != null)
@@ -135,16 +137,22 @@ public class OwlRelocateState : State
             rb.useGravity = previousUseGravity;
         }
 
-        if (visionSense != null)
-            visionSense.SetVisionEnabled(previousVisionEnabled);
+        if (owlVisionSense != null)
+        {
+            owlVisionSense.SetVisionEnabled(previousVisionEnabled);
+        }
 
         if (visionLight != null)
+        {
             visionLight.enabled = previousLightEnabled;
+        }
     }
 
     private bool MoveTowards(Vector3 targetPosition, float speed)
     {
-        Vector3 direction = targetPosition - rb.position;
+        Vector3 direction =
+            targetPosition - rb.position;
+
         float distance = direction.magnitude;
 
         if (distance <= arrivalDistance)
@@ -187,10 +195,13 @@ public class OwlRelocateState : State
             return flightWaypoints[selectedIndex];
         }
 
-        for (int offset = 1; offset <= flightWaypoints.Length; offset++)
+        for (int offset = 1;
+             offset <= flightWaypoints.Length;
+             offset++)
         {
             int index =
-                (closestIndex + offset) % flightWaypoints.Length;
+                (closestIndex + offset) %
+                flightWaypoints.Length;
 
             if (flightWaypoints[index] != null)
                 return flightWaypoints[index];
@@ -209,9 +220,11 @@ public class OwlRelocateState : State
             if (flightWaypoints[i] == null)
                 continue;
 
-            float distance = Vector3.SqrMagnitude(
-                rb.position - flightWaypoints[i].position
-            );
+            float distance =
+                Vector3.SqrMagnitude(
+                    rb.position -
+                    flightWaypoints[i].position
+                );
 
             if (distance < closestDistance)
             {

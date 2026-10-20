@@ -17355,10 +17355,6 @@ PrefabInstance:
       propertyPath: 'flightWaypoints.Array.data[2]'
       value: 
       objectReference: {fileID: 77015885}
-    - target: {fileID: 6597338940086226388, guid: 410e182d6560f6b4aa6357345d16df49, type: 3}
-      propertyPath: normalIntensity
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7797442201264085558, guid: 410e182d6560f6b4aa6357345d16df49, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.601002

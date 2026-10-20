@@ -478,7 +478,7 @@ MonoBehaviour:
   - {fileID: 3736006166872146670}
   movementScripts: []
   rb: {fileID: 4898398659027871412}
-  visionSense: {fileID: 3373575851038827700}
+  owlVisionSense: {fileID: 3373575851038827700}
   visionLight: {fileID: 422448439495996590}
   flightWaypoints:
   - {fileID: 0}
@@ -834,8 +834,8 @@ MonoBehaviour:
   transitions:
   - {fileID: 7654474983358940082}
   movementScripts: []
-  visionSense: {fileID: 3373575851038827700}
-  hearingSense: {fileID: 1397553374154506494}
+  owlVisionSense: {fileID: 3373575851038827700}
+  owlHearingSense: {fileID: 1397553374154506494}
   visionPivot: {fileID: 6186679405000950242}
   alertSoundPrefab: {fileID: 2060549050020367009, guid: c1f247d8e2fd5d54ab1dc57119fd53b6, type: 3}
   rotationSpeed: 120
@@ -904,7 +904,7 @@ MonoBehaviour:
   - {fileID: 5723086645510967977}
   - {fileID: 1458600382406446899}
   movementScripts: []
-  hearingSense: {fileID: 1397553374154506494}
+  owlHearingSense: {fileID: 1397553374154506494}
   visionPivot: {fileID: 6186679405000950242}
   rotationSpeed: 120
 --- !u!114 &5723086645510967977
