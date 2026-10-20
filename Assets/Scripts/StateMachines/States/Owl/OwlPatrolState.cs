@@ -15,16 +15,34 @@ public class OwlPatrolState : State
     public override void OnEntry()
     {
         timer = 0f;
+
+        // For the black owl, restart the relocation timer
+        // every time it returns to Patrol.
+        foreach (Transition transition in transitions)
+        {
+            if (transition is Transition_OwlRelocate relocateTransition)
+            {
+                relocateTransition.ResetTimer();
+            }
+        }
     }
 
     public override void OnUpdate()
     {
-        if (visionPivot == null || lookPoints.Length == 0)
+        if (visionPivot == null ||
+            lookPoints == null ||
+            lookPoints.Length == 0)
+        {
+            return;
+        }
+
+        Transform target = lookPoints[currentPoint];
+
+        if (target == null)
             return;
 
         Vector3 direction =
-            lookPoints[currentPoint].position -
-            visionPivot.position;
+            target.position - visionPivot.position;
 
         direction.y = 0f;
 
@@ -32,7 +50,10 @@ public class OwlPatrolState : State
             return;
 
         Quaternion targetRotation =
-            Quaternion.LookRotation(direction.normalized);
+            Quaternion.LookRotation(
+                direction.normalized,
+                Vector3.up
+            );
 
         visionPivot.rotation =
             Quaternion.RotateTowards(
@@ -59,6 +80,10 @@ public class OwlPatrolState : State
                     (currentPoint + 1) %
                     lookPoints.Length;
             }
+        }
+        else
+        {
+            timer = 0f;
         }
     }
 
