@@ -15943,7 +15943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943087884764718473, guid: c4ddd0f06ec6d204fa22aa4a14835538, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.99
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 2943087884764718473, guid: c4ddd0f06ec6d204fa22aa4a14835538, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15951,7 +15951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943087884764718473, guid: c4ddd0f06ec6d204fa22aa4a14835538, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.66
+      value: -1.21
       objectReference: {fileID: 0}
     - target: {fileID: 2943087884764718473, guid: c4ddd0f06ec6d204fa22aa4a14835538, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19224,6 +19224,10 @@ PrefabInstance:
     - target: {fileID: 4147362801305083882, guid: c4ddd0f06ec6d204fa22aa4a14835538, type: 3}
       propertyPath: m_Name
       value: JabaliAlfa
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147362801305083882, guid: c4ddd0f06ec6d204fa22aa4a14835538, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6892747814004450683, guid: c4ddd0f06ec6d204fa22aa4a14835538, type: 3}
       propertyPath: player
