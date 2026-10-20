@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Steering_SeekFlee : MovementScript
+public abstract class Steering_SeekFlee : SteeringBehaviour
 {
 
 

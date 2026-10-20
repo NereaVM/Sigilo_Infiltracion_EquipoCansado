@@ -17,6 +17,21 @@ public class PlayerMovement : MonoBehaviour
     public bool IsMoving =>
         movementInput.sqrMagnitude > 0.001f;
 
+    public float CurrentMoveSpeed
+    {
+        get
+        {
+            if (!IsMoving || playerEnergy == null)
+                return 0f;
+
+            return Mathf.Lerp(
+                minMoveSpeed,
+                maxMoveSpeed,
+                playerEnergy.NormalizedEnergy
+            );
+        }
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
