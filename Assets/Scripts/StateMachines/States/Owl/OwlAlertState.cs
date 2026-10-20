@@ -3,8 +3,8 @@ using UnityEngine;
 public class OwlAlertState : State
 {
     [Header("References")]
-    [SerializeField] private VisionSense visionSense;
-    [SerializeField] private HearingSense_Owl hearingSense;
+    [SerializeField] private VisionSense owlVisionSense;
+    [SerializeField] private HearingSense_Owl owlHearingSense;
     [SerializeField] private Transform visionPivot;
 
     [Header("Alert Sound")]
@@ -15,7 +15,6 @@ public class OwlAlertState : State
 
     public override void OnEntry()
     {
-        // Reinicia el temporizador del estado de alerta.
         foreach (Transition transition in transitions)
         {
             if (transition is Transition_Timer timer)
@@ -24,7 +23,6 @@ public class OwlAlertState : State
             }
         }
 
-        // Genera una única alerta al entrar en el estado.
         if (alertSoundPrefab != null)
         {
             GeneratedSound alertSound =
@@ -34,24 +32,21 @@ public class OwlAlertState : State
                     Quaternion.identity
                 );
 
-            // Evita que el búho escuche su propia alerta.
-            alertSound.soundGenerator = hearingSense;
+            alertSound.soundGenerator = owlHearingSense;
         }
     }
 
     public override void OnUpdate()
     {
-        // Mientras siga viendo al jugador,
-        // mantiene la mirada dirigida hacia él.
-        if (visionSense == null ||
+        if (owlVisionSense == null ||
             visionPivot == null ||
-            !visionSense.hasSeenEntity)
+            !owlVisionSense.hasSeenEntity)
         {
             return;
         }
 
         Vector3 direction =
-            visionSense.lastSeenPosition -
+            owlVisionSense.lastSeenPosition -
             visionPivot.position;
 
         direction.y = 0f;

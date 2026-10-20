@@ -523,8 +523,8 @@ MonoBehaviour:
   transitions:
   - {fileID: 6221470144557143700}
   movementScripts: []
-  visionSense: {fileID: 5442791153698589316}
-  hearingSense: {fileID: 5370055644521908519}
+  owlVisionSense: {fileID: 5442791153698589316}
+  owlHearingSense: {fileID: 5370055644521908519}
   visionPivot: {fileID: 6242874682726377768}
   alertSoundPrefab: {fileID: 2060549050020367009, guid: c1f247d8e2fd5d54ab1dc57119fd53b6, type: 3}
   rotationSpeed: 120
@@ -777,7 +777,7 @@ MonoBehaviour:
   - {fileID: 4454690798454680520}
   - {fileID: 2319350756831906774}
   movementScripts: []
-  hearingSense: {fileID: 5370055644521908519}
+  owlHearingSense: {fileID: 5370055644521908519}
   visionPivot: {fileID: 6242874682726377768}
   rotationSpeed: 120
 --- !u!114 &4454690798454680520

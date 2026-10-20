@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class OwlInvestigationState : State
 {
-    [SerializeField] private HearingSense_Owl hearingSense;
+    [Header("References")]
+    [SerializeField] private HearingSense_Owl owlHearingSense;
     [SerializeField] private Transform visionPivot;
 
+    [Header("Investigation")]
     [SerializeField] private float rotationSpeed = 120f;
 
     private Vector3 soundPosition;
 
     public override void OnEntry()
     {
-        soundPosition = hearingSense.lastSoundPosition;
+        if (owlHearingSense != null)
+        {
+            soundPosition = owlHearingSense.lastSoundPosition;
+        }
 
         foreach (Transition transition in transitions)
         {
@@ -36,7 +41,10 @@ public class OwlInvestigationState : State
             return;
 
         Quaternion targetRotation =
-            Quaternion.LookRotation(direction.normalized);
+            Quaternion.LookRotation(
+                direction.normalized,
+                Vector3.up
+            );
 
         visionPivot.rotation =
             Quaternion.RotateTowards(
