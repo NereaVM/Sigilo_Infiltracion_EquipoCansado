@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 5400244524684343806}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2, y: 0.97, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -228,12 +228,13 @@ MonoBehaviour:
   walkState: Walk
   runState: Run
   movementThreshold: 0.02
-  runThreshold: 2.75
+  runThreshold: 2.4
   walkReferenceSpeed: 2
   runReferenceSpeed: 4
   minAnimationSpeed: 0.65
   maxAnimationSpeed: 1.5
   transitionDuration: 0.1
+  runToWalkTransitionDuration: 0.4
 --- !u!114 &7045971116419121709
 MonoBehaviour:
   m_ObjectHideFlags: 0
