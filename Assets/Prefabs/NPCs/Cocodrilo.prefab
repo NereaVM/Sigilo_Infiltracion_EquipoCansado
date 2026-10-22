@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -21.2, y: -0.38, z: -3}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8768561816739198876}
@@ -145,7 +145,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 1.6
   m_Direction: 2
-  m_Center: {x: 0, y: 0.3, z: 0.22}
+  m_Center: {x: 0, y: 0.31, z: 0.22}
 --- !u!114 &8212996278015968731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1de84f90ff5ab940a80c0b35b1dcdf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Crocodile_Pursue
-  maxSteeringForce: 0
-  targetTransform: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  maxSteeringForce: 0
   rb: {fileID: 0}
   arriveDistance: 1
   slowingDistance: 5
