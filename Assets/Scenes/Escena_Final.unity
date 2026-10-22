@@ -951,7 +951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &73878843
 RectTransform:
   m_ObjectHideFlags: 0
@@ -991,6 +991,7 @@ MonoBehaviour:
   teamLogo: {fileID: 1500932494}
   ujiLogo: {fileID: 1862157780}
   pauseMenu: {fileID: 626891200}
+  energyBar: {fileID: 664291044}
   holdDuration: 2
   fadeDuration: 4
   startScale: 1.15

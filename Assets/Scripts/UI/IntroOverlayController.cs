@@ -22,6 +22,9 @@ public class IntroOverlayController : MonoBehaviour
     [SerializeField]
     private PauseMenu pauseMenu;
 
+    [SerializeField] 
+    private GameObject energyBar;
+
     [Header("Timing")]
     [SerializeField] private float holdDuration = 0.25f;
     [SerializeField] private float fadeDuration = 0.75f;
@@ -38,6 +41,12 @@ public class IntroOverlayController : MonoBehaviour
     {
         if (hasPlayedThisSession)
         {
+            if (pauseMenu != null)
+                pauseMenu.SetPauseAllowed(true);
+
+            if (energyBar != null)
+                energyBar.SetActive(true);
+
             gameObject.SetActive(false);
             return;
         }
@@ -48,6 +57,9 @@ public class IntroOverlayController : MonoBehaviour
         {
             pauseMenu.SetPauseAllowed(false);
         }
+
+        if (energyBar != null)
+            energyBar.SetActive(false);
 
         if (canvasGroup == null)
         {
@@ -151,14 +163,13 @@ public class IntroOverlayController : MonoBehaviour
         }
 
         if (canvasGroup != null)
-        {
             canvasGroup.alpha = 0f;
-        }
 
         if (pauseMenu != null)
-        {
             pauseMenu.SetPauseAllowed(true);
-        }
+
+        if (energyBar != null)
+            energyBar.SetActive(true);
 
         gameObject.SetActive(false);
     }
