@@ -71,5 +71,11 @@ public class Grabbable : MonoBehaviour
 
         // Aplicar una velocidad inicial independiente de la masa.
         rb.AddForce(force, ForceMode.VelocityChange);
+
+        // Avisar al objeto de que ha sido lanzado.
+        RockImpactSound impactSound = GetComponent<RockImpactSound>();
+
+        if (impactSound != null)
+            impactSound.MarkAsThrown();
     }
 }
