@@ -1,85 +1,135 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Launcher : MonoBehaviour
 {
-    public Transform spawnPoint;
+    [Header("Recogida")]
     public float pickupRange = 4f;
-    public float maxThrowDistance = 5f;
-    public float throwForceMultiplier = 2.2f;
-    public float upwardForce = 3.5f;
 
-    private Camera mainCamera;
+    [Header("Lanzamiento")]
+    public Transform spawnPoint;
+    public float minThrowForce = 5f;
+    public float maxThrowForce = 12f;
+    public float maxChargeTime = 2f;
+    public float upwardForce = 6f;
+
     private Grabbable currentItem;
+    private float chargeStartTime = -1f;
+
+    // Colliders del jugador.
+    private Collider[] playerColliders;
+
+    public bool IsCharging =>
+        currentItem != null && chargeStartTime >= 0f;
+
+    public float ChargeNormalized =>
+        IsCharging
+            ? Mathf.Clamp01(
+                (Time.time - chargeStartTime) /
+                Mathf.Max(0.01f, maxChargeTime))
+            : 0f;
 
     private void Awake()
     {
-        mainCamera = Camera.main;
+        // Obtener los colliders del jugador y sus hijos.
+        playerColliders = GetComponentsInChildren<Collider>();
     }
 
     private void Update()
     {
-        if (Mouse.current == null)
-            return;
+        if (Keyboard.current == null) return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        bool rPressed = Keyboard.current.rKey.wasPressedThisFrame;
+        bool rReleased = Keyboard.current.rKey.wasReleasedThisFrame;
+
+        // Sin objeto: recoger al pulsar R.
+        if (currentItem == null)
         {
-            if (currentItem == null)
-            {
-                TryPickUpObject();
-            }
-            else
-            {
-                ThrowObject();
-            }
+            if (rPressed)
+                TryPickUp();
+
+            return;
+        }
+
+        // Empezar a cargar el lanzamiento.
+        if (rPressed)
+        {
+            chargeStartTime = Time.time;
+        }
+
+        // Lanzar al soltar R.
+        if (rReleased && chargeStartTime >= 0f)
+        {
+            ThrowObject();
         }
     }
 
-    private void TryPickUpObject()
+    private void TryPickUp()
     {
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
+        Collider[] hits =
+            Physics.OverlapSphere(transform.position, pickupRange);
 
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        Grabbable closest = null;
+        float closestDist = float.MaxValue;
+
+        foreach (var col in hits)
         {
-            Grabbable grabbable = hit.collider.GetComponentInParent<Grabbable>();
+            Grabbable g = col.GetComponentInParent<Grabbable>();
 
-            if (grabbable == null || grabbable.IsBeingHeld)
-                return;
+            if (g == null || g.IsBeingHeld)
+                continue;
 
-            float distanceToPlayer = Vector3.Distance(transform.position, grabbable.transform.position);
+            float dist = Vector3.Distance(
+                transform.position,
+                g.transform.position
+            );
 
-            if (distanceToPlayer <= pickupRange)
+            if (dist < closestDist)
             {
-                currentItem = grabbable;
-                currentItem.PickUp(spawnPoint != null ? spawnPoint : transform);
+                closestDist = dist;
+                closest = g;
             }
         }
+
+        if (closest == null) return;
+
+        currentItem = closest;
+
+        currentItem.PickUp(
+            spawnPoint != null ? spawnPoint : transform
+        );
     }
 
     private void ThrowObject()
     {
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
+        // Dirección horizontal hacia donde mira el jugador.
+        Vector3 throwDir = transform.forward;
+        throwDir.y = 0f;
+        throwDir.Normalize();
 
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            Vector3 origin = spawnPoint != null ? spawnPoint.position : transform.position;
-            Vector3 target = hit.point;
+        // Intensidad según cuánto hemos cargado.
+        float force = Mathf.Lerp(
+            minThrowForce,
+            maxThrowForce,
+            ChargeNormalized
+        );
 
-            Vector3 direction = target - origin;
-            direction.y = 0f;
+        // Movimiento hacia delante y hacia arriba.
+        Vector3 finalForce =
+            throwDir * force +
+            Vector3.up * upwardForce;
 
-            float distance = direction.magnitude;
-            float clampedDistance = Mathf.Clamp(distance, 1f, maxThrowDistance);
-            Vector3 normalizedDirection = direction.normalized;
+        // Lanzar evitando colisiones con el jugador.
+        currentItem.Throw(finalForce, playerColliders);
 
-            Vector3 horizontalForce = normalizedDirection * (clampedDistance * throwForceMultiplier);
-            Vector3 verticalForce = Vector3.up * upwardForce;
-            Vector3 finalForce = horizontalForce + verticalForce;
+        currentItem = null;
+        chargeStartTime = -1f;
+    }
 
-            currentItem.Throw(finalForce);
-            currentItem = null;
-        }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, pickupRange);
     }
 }
