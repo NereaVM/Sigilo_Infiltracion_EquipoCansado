@@ -20,7 +20,14 @@ public class SimpleMovementAnimator_Player_Mono : MonoBehaviour
     [SerializeField] private float runReferenceSpeed = 4f;
     [SerializeField] private float minAnimationSpeed = 0.65f;
     [SerializeField] private float maxAnimationSpeed = 1.5f;
+
+    [Header("Transitions")]
     [SerializeField] private float transitionDuration = 0.1f;
+
+    // NEREA:
+    // Slightly longer transition when the monkey becomes tired
+    // and changes from running to walking.
+    [SerializeField] private float runToWalkTransitionDuration = 0.3f;
 
     private enum MovementState
     {
@@ -53,29 +60,55 @@ public class SimpleMovementAnimator_Player_Mono : MonoBehaviour
         MovementState newState;
 
         if (speed <= movementThreshold)
+        {
             newState = MovementState.Idle;
+        }
         else if (speed < runThreshold)
+        {
             newState = MovementState.Walk;
+        }
         else
+        {
             newState = MovementState.Run;
+        }
 
         if (newState != currentState)
         {
+            MovementState previousState = currentState;
             currentState = newState;
 
             switch (currentState)
             {
                 case MovementState.Idle:
                     animator.speed = 1f;
-                    animator.CrossFade(idleState, transitionDuration);
+
+                    animator.CrossFadeInFixedTime(
+                        idleState,
+                        transitionDuration
+                    );
                     break;
 
                 case MovementState.Walk:
-                    animator.CrossFade(walkState, transitionDuration);
+
+                    // NEREA:
+                    // Run -> Walk uses a smoother transition
+                    // to avoid a visible cut when stamina decreases.
+                    float walkTransition =
+                        previousState == MovementState.Run
+                        ? runToWalkTransitionDuration
+                        : transitionDuration;
+
+                    animator.CrossFadeInFixedTime(
+                        walkState,
+                        walkTransition
+                    );
                     break;
 
                 case MovementState.Run:
-                    animator.CrossFade(runState, transitionDuration);
+                    animator.CrossFadeInFixedTime(
+                        runState,
+                        transitionDuration
+                    );
                     break;
             }
         }

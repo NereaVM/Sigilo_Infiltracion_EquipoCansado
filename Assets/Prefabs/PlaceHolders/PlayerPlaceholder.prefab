@@ -31,6 +31,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6679593341578530936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5400244524684343806 GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+    - component: {fileID: 3598034947019335618}
+  m_Layer: 0
+  m_Name: spawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3598034947019335618 Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400244524684343806}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6679593341578530936}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+
 --- !u!1 &7317612781182048055
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,12 +227,13 @@ MonoBehaviour:
   walkState: Walk
   runState: Run
   movementThreshold: 0.02
-  runThreshold: 2.75
+  runThreshold: 2.4
   walkReferenceSpeed: 2
   runReferenceSpeed: 4
   minAnimationSpeed: 0.65
   maxAnimationSpeed: 1.5
   transitionDuration: 0.1
+  runToWalkTransitionDuration: 0.4
 --- !u!114 &7045971116419121709
 MonoBehaviour:
   m_ObjectHideFlags: 0
