@@ -1,15 +1,10 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class WinPoint : MonoBehaviour
 {
-    [Header("UI")]
-    [SerializeField] private GameObject victoryPanel;
+    [Header("Menus")]
+    [SerializeField] private WinMenu winMenu;
     [SerializeField] private PauseMenu pauseMenu;
-
-    [Header("Restart")]
-    [SerializeField] private float restartDelay = 5f;
 
     private bool gameWon = false;
 
@@ -23,25 +18,12 @@ public class WinPoint : MonoBehaviour
 
         gameWon = true;
 
+        // Impide abrir el menú de pausa después de ganar
         if (pauseMenu != null)
             pauseMenu.SetPauseAllowed(false);
 
-        if (victoryPanel != null)
-            victoryPanel.SetActive(true);
-
-        Time.timeScale = 0f;
-
-        StartCoroutine(RestartAfterDelay());
-    }
-
-    private IEnumerator RestartAfterDelay()
-    {
-        yield return new WaitForSecondsRealtime(restartDelay);
-
-        Time.timeScale = 1f;
-
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
-        );
+        // Muestra la pantalla de victoria
+        if (winMenu != null)
+            winMenu.ShowWinMenu();
     }
 }
