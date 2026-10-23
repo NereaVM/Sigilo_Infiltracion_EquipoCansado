@@ -16,6 +16,11 @@ public class StateMachine : MonoBehaviour
     private MovementSystemController movementSystemController;
     private State currentState;
 
+    // NEREA:
+    // Allows other systems to read the current state
+    // without being able to modify it.
+    public State CurrentState => currentState;
+
     private void Awake()
     {
         movementSystemController = GetComponent<MovementSystemController>();

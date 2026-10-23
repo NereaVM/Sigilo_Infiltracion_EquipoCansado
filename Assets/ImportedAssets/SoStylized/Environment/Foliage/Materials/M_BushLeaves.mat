@@ -101,6 +101,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: af27d632f75721640aa8499b2c88b4b5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SingleMaterialWoodTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Smoothness:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -226,6 +230,7 @@ Material:
     - _SecondColorOverlayType: 1
     - _ShadowCutoffOffset: -30
     - _Shininess: 0.1
+    - _SingleMaterialLOD: 0
     - _Smoot: 1
     - _Smoothness: 0
     - _SmoothnessInt: 0
@@ -282,7 +287,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Gradient_Color: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 0.1493766, g: 0.639, b: 0.27385706, a: 0}
-    - _Main_Color: {r: 0.040094107, g: 0.5647059, b: 0.22492969, a: 1}
+    - _Main_Color: {r: 0.03203987, g: 0.4528302, b: 0.24035612, a: 1}
     - _Min_MAx: {r: -1, g: 1, b: 0, a: 0}
     - _Rim_Color: {r: 0.15686275, g: 0.3254902, b: 0.1764706, a: 0}
     - _SSSColor: {r: 0.16470589, g: 0.16470589, b: 0.027450982, a: 0}
