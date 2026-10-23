@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4063254348121723648}
   - component: {fileID: 7980100399453557255}
+  - component: {fileID: 6894245329648790827}
   m_Layer: 0
   m_Name: Bush_SaveZone
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8486206236572244297}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.34786, y: -1.4332699, z: 0.36309433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -48,12 +49,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.2943516, y: 1.6969224, z: 1.4545145}
   m_Center: {x: -0.01731491, y: 0.59952646, z: -0.11471033}
+--- !u!114 &6894245329648790827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486206236572244297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16babd9f7257b83478d2db4e86426cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BushSafeZone
 --- !u!1001 &1494410131825330301
 PrefabInstance:
   m_ObjectHideFlags: 0

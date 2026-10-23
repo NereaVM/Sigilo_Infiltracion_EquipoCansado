@@ -27,7 +27,7 @@ public class VisionSense : MonoBehaviour
         // Vision is recalculated every frame.
         // If nothing is visible this frame, hasSeenEntity stays false.
         hasSeenEntity = false;
-        
+
         Vector3 origin = GetVisionOrigin();
 
         Collider[] detectedColliders = Physics.OverlapSphere(
@@ -37,7 +37,8 @@ public class VisionSense : MonoBehaviour
             QueryTriggerInteraction.Ignore
         );
 
-        HashSet<VisibleEntity> checkedEntities = new HashSet<VisibleEntity>();
+        HashSet<VisibleEntity> checkedEntities =
+            new HashSet<VisibleEntity>();
 
         VisibleEntity closestVisibleEntity = null;
         float closestDistance = float.MaxValue;
@@ -57,21 +58,38 @@ public class VisionSense : MonoBehaviour
                 continue;
             }
 
+            // NEREA:
+            // If the visible entity is the player and it is inside
+            // a bush, check whether this specific NPC is allowed
+            // to continue seeing it.
+            PlayerBushStealth bushStealth =
+                visibleEntity.GetComponentInParent<PlayerBushStealth>();
+
+            if (bushStealth != null &&
+                !bushStealth.CanBeSeenBy(this))
+            {
+                continue;
+            }
+
             if (!checkedEntities.Add(visibleEntity))
             {
                 continue;
             }
 
-            // Prevents the entity from detecting itself
+            // Prevents the entity from detecting itself.
             if (visibleEntity.transform.root == transform.root)
             {
                 continue;
             }
 
-            Vector3 targetPosition = visibleEntity.GetVisionPosition();
-            Vector3 directionToTarget = targetPosition - origin;
+            Vector3 targetPosition =
+                visibleEntity.GetVisionPosition();
 
-            float distanceToTarget = directionToTarget.magnitude;
+            Vector3 directionToTarget =
+                targetPosition - origin;
+
+            float distanceToTarget =
+                directionToTarget.magnitude;
 
             if (distanceToTarget <= Mathf.Epsilon)
             {
@@ -79,10 +97,16 @@ public class VisionSense : MonoBehaviour
             }
 
             Vector3 horizontalDirection =
-                Vector3.ProjectOnPlane(directionToTarget, Vector3.up);
+                Vector3.ProjectOnPlane(
+                    directionToTarget,
+                    Vector3.up
+                );
 
             Vector3 horizontalForward =
-                Vector3.ProjectOnPlane(GetVisionForward(), Vector3.up);
+                Vector3.ProjectOnPlane(
+                    GetVisionForward(),
+                    Vector3.up
+                );
 
             if (horizontalDirection.sqrMagnitude <= 0.0001f ||
                 horizontalForward.sqrMagnitude <= 0.0001f)
@@ -90,10 +114,11 @@ public class VisionSense : MonoBehaviour
                 continue;
             }
 
-            float angleToTarget = Vector3.Angle(
-                horizontalForward.normalized,
-                horizontalDirection.normalized
-            );
+            float angleToTarget =
+                Vector3.Angle(
+                    horizontalForward.normalized,
+                    horizontalDirection.normalized
+                );
 
             if (angleToTarget > viewAngle * 0.5f)
             {
@@ -134,7 +159,9 @@ public class VisionSense : MonoBehaviour
         {
             hasSeenEntity = true;
             lastSeenEntity = closestVisibleEntity;
-            lastSeenPosition = closestVisibleEntity.GetVisionPosition();
+
+            lastSeenPosition =
+                closestVisibleEntity.GetVisionPosition();
 
             Debug.Log(
                 $"Entity seen: {closestVisibleEntity.gameObject.name}. " +
@@ -190,17 +217,34 @@ public class VisionSense : MonoBehaviour
 
         Gizmos.color = Color.cyan;
 
-        Gizmos.DrawWireSphere(origin, viewDistance);
+        Gizmos.DrawWireSphere(
+            origin,
+            viewDistance
+        );
 
-        Vector3 forward = GetVisionForward();
+        Vector3 forward =
+            GetVisionForward();
 
         Vector3 leftBoundary =
-            Quaternion.AngleAxis(-viewAngle * 0.5f, Vector3.up) * forward;
+            Quaternion.AngleAxis(
+                -viewAngle * 0.5f,
+                Vector3.up
+            ) * forward;
 
         Vector3 rightBoundary =
-            Quaternion.AngleAxis(viewAngle * 0.5f, Vector3.up) * forward;
+            Quaternion.AngleAxis(
+                viewAngle * 0.5f,
+                Vector3.up
+            ) * forward;
 
-        Gizmos.DrawRay(origin, leftBoundary * viewDistance);
-        Gizmos.DrawRay(origin, rightBoundary * viewDistance);
+        Gizmos.DrawRay(
+            origin,
+            leftBoundary * viewDistance
+        );
+
+        Gizmos.DrawRay(
+            origin,
+            rightBoundary * viewDistance
+        );
     }
 }
