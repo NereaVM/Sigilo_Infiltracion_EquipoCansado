@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523109243297762423, guid: 871f396b2fb814f4f9d3d6a616db0bf5, type: 3}
       propertyPath: m_Name
-      value: GeneratedSoundPrefab_Base Variant
+      value: GeneratedSound_RockImpact
       objectReference: {fileID: 0}
     - target: {fileID: 4802369142998205456, guid: 871f396b2fb814f4f9d3d6a616db0bf5, type: 3}
       propertyPath: m_LocalPosition.x

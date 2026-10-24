@@ -1,38 +1,63 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneratedSound : HearingSystem
 {
     [SerializeField] private SoundType soundType;
-    [SerializeField] private float duration; // Duration of the sound before dissapearing. -1 means infinite duration
-    [SerializeField] private bool onlyHeardOncePerEntity = false; // If true, the sound will only be heard once by each entity. If false, it can be heard multiple times.
-    public HearingSense soundGenerator; // Reference to the HearingSense component that generated this sound for ignoring the sound generator itself. 
-    private List<HearingSense> affectedEntities;
-    void OnEnable()
+    [SerializeField] private float duration;
+    [SerializeField] private bool onlyHeardOncePerEntity = false;
+
+    public HearingSense soundGenerator;
+
+    private List<HearingSense> affectedEntities = new List<HearingSense>();
+
+    private void OnEnable()
     {
-        // Destroy after a set time
-        if (duration >= 0) Destroy(gameObject, duration);
+        // Destroy after a set time.
+        // -1 means infinite duration.
+        if (duration >= 0)
+        {
+            Destroy(gameObject, duration);
+        }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        HearingSense hearingSense = other.GetComponent<HearingSense>();
-        if (hearingSense == null || hearingSense == soundGenerator) return;
-        if (onlyHeardOncePerEntity && HasHeardAlready(hearingSense)) return;
+        HearingSense hearingSense = other.GetComponentInParent<HearingSense>();
+
+        if (hearingSense == null || hearingSense == soundGenerator)
+            return;
+
+        if (onlyHeardOncePerEntity && HasHeardAlready(hearingSense))
+            return;
 
         hearingSense.HearSound(soundType, transform.position);
-        Debug.Log("Tried to hear sound. [GeneratedSound][OnTriggerEnter]");
-        
-        if (onlyHeardOncePerEntity) affectedEntities.Add(hearingSense);
+
+        // Debug para comprobar qué animal recibe el sonido.
+        Debug.Log(
+            $"[GeneratedSound] {hearingSense.gameObject.name} " +
+            $"ha recibido una señal de tipo {soundType} " +
+            $"desde {transform.position}"
+        );
+
+        if (onlyHeardOncePerEntity)
+        {
+            affectedEntities.Add(hearingSense);
+        }
     }
 
-    bool HasHeardAlready(HearingSense hearingSense)
+    private bool HasHeardAlready(HearingSense hearingSense)
     {
         foreach (var entity in affectedEntities)
         {
             if (entity == hearingSense)
             {
-                Debug.Log("Entity already affected by this sound. [GeneratedSound][CheckIfAlreadyHeard]");
+                Debug.Log(
+                    "Entity already affected by this sound. " +
+                    "[GeneratedSound][HasHeardAlready]"
+                );
+
                 return true;
             }
         }
@@ -40,15 +65,18 @@ public class GeneratedSound : HearingSystem
         return false;
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         SphereCollider sphereCollider = GetComponentInChildren<SphereCollider>();
+
         if (sphereCollider == null)
-        {
             return;
-        }
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sphereCollider.radius * sphereCollider.transform.lossyScale.x);
+
+        Gizmos.DrawWireSphere(
+            transform.position,
+            sphereCollider.radius * sphereCollider.transform.lossyScale.x
+        );
     }
 }
