@@ -31,7 +31,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6679593341578530936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5400244524684343806 GameObject:
+--- !u!1 &5400244524684343806
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -46,7 +47,8 @@ Transform:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3598034947019335618 Transform:
+--- !u!4 &3598034947019335618
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -78,6 +80,7 @@ GameObject:
   - component: {fileID: 7216717248966352895}
   - component: {fileID: 4102068180150132430}
   - component: {fileID: 7045971116419121709}
+  - component: {fileID: 7932993263606025976}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Player
@@ -101,6 +104,7 @@ Transform:
   - {fileID: 4009013023052077289}
   - {fileID: 2368137319138638080}
   - {fileID: 6997428424984341771}
+  - {fileID: 3598034947019335618}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2218521328806934245
@@ -252,6 +256,8 @@ MonoBehaviour:
   maxThrowForce: 15
   maxChargeTime: 2
   upwardForce: 7
+  maxThrowDistance: 8
+  throwForceMultiplier: 2.2
 --- !u!1 &8856212553853527830
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +289,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6679593341578530936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7932993263606025976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317612781182048055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83dc9b6a2c06ff4981c1eb507ba3936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBushStealth
 --- !u!1001 &3226922773033645602
 PrefabInstance:
   m_ObjectHideFlags: 0
