@@ -17,8 +17,20 @@ public class PlayerMovement : MonoBehaviour
     public bool IsMoving =>
         movementInput.sqrMagnitude > 0.001f;
 
-    // Used by the animation controller to know the actual movement speed.
-    public float CurrentMoveSpeed { get; private set; }
+    public float CurrentMoveSpeed
+    {
+        get
+        {
+            if (!IsMoving || playerEnergy == null)
+                return 0f;
+
+            return Mathf.Lerp(
+                minMoveSpeed,
+                maxMoveSpeed,
+                playerEnergy.NormalizedEnergy
+            );
+        }
+    }
 
     private void Awake()
     {
@@ -62,21 +74,18 @@ public class PlayerMovement : MonoBehaviour
         );
 
         if (direction.sqrMagnitude < 0.001f)
-        {
-            CurrentMoveSpeed = 0f;
             return;
-        }
 
         // Energía 100% -> velocidad máxima.
         // Energía 0%   -> velocidad mínima.
-        CurrentMoveSpeed = Mathf.Lerp(
+        float currentSpeed = Mathf.Lerp(
             minMoveSpeed,
             maxMoveSpeed,
             playerEnergy.NormalizedEnergy
         );
 
         Vector3 movement =
-            direction * CurrentMoveSpeed * Time.fixedDeltaTime;
+            direction * currentSpeed * Time.fixedDeltaTime;
 
         rb.MovePosition(rb.position + movement);
 

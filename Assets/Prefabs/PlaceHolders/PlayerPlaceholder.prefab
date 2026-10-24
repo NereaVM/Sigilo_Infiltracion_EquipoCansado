@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 5400244524684343806}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2, y: 0.97, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 7216717248966352895}
   - component: {fileID: 4102068180150132430}
   - component: {fileID: 7045971116419121709}
+  - component: {fileID: 7932993263606025976}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Player
@@ -228,12 +229,13 @@ MonoBehaviour:
   walkState: Walk
   runState: Run
   movementThreshold: 0.02
-  runThreshold: 2.75
+  runThreshold: 2.4
   walkReferenceSpeed: 2
   runReferenceSpeed: 4
   minAnimationSpeed: 0.65
   maxAnimationSpeed: 1.5
   transitionDuration: 0.1
+  runToWalkTransitionDuration: 0.4
 --- !u!114 &7045971116419121709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +253,18 @@ MonoBehaviour:
   maxThrowDistance: 8
   throwForceMultiplier: 2.2
   upwardForce: 3.5
+--- !u!114 &7932993263606025976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317612781182048055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83dc9b6a2c06ff4981c1eb507ba3936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBushStealth
 --- !u!1001 &3226922773033645602
 PrefabInstance:
   m_ObjectHideFlags: 0

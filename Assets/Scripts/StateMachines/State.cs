@@ -13,10 +13,12 @@ using UnityEngine;
 public abstract class State : MonoBehaviour
 {
     private StateMachine stateMachine;
+
     public void SetStateMachine(StateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
     }
+
     private HearingSense hearingSense;
     private VisionSense visionSense;
 
@@ -28,10 +30,12 @@ public abstract class State : MonoBehaviour
             movementScript.enabled = false;
         }
     }
+
     /// <summary>
     ///     Actions to perform when transitioning from the previous state to this one.
     /// </summary>
     public abstract void OnEntry();
+
     public void _OnEntry()
     {
         foreach (Transition transition in transitions)
@@ -41,7 +45,7 @@ public abstract class State : MonoBehaviour
 
         OnEntry();
     }
-    
+
     /// <summary>
     ///     Actions to perform on the Update loop.
     /// </summary>
@@ -63,6 +67,7 @@ public abstract class State : MonoBehaviour
     ///    as the State Machine will apply the first transition that finds as triggered.
     /// </remarks>
     public Transition[] transitions;
+
     public Transition[] GetTransitions()
     {
         return transitions;
@@ -72,5 +77,4 @@ public abstract class State : MonoBehaviour
     ///     MovementScripts that will control the movement of the NPC while in this state.
     /// </summary>
     public MovementScript[] movementScripts;
-    
 }
