@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,30 +14,66 @@ public class DefeatOnContact : MonoBehaviour
 
     private bool defeated = false;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         if (defeated)
             return;
 
-        if (!other.CompareTag("Player"))
+        // Comprobar si hemos tocado un animal
+        // que utiliza la máquina de estados.
+        StateMachine enemy =
+            collision.collider.GetComponentInParent<StateMachine>();
+
+        if (enemy == null)
+            return;
+
+        Debug.Log(
+            "[DEFEAT] El jugador ha tocado a: " +
+            enemy.gameObject.name
+        );
+
+        TriggerDefeat();
+    }
+
+    private void TriggerDefeat()
+    {
+        if (defeated)
             return;
 
         defeated = true;
 
+        // Desactivar la posibilidad de pausar.
         if (pauseMenu != null)
+        {
             pauseMenu.SetPauseAllowed(false);
+        }
 
+        // Mostrar pantalla de derrota.
         if (defeatPanel != null)
+        {
             defeatPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning(
+                "[DEFEAT] No hay panel de derrota asignado."
+            );
+        }
 
+        // Detener el juego.
         Time.timeScale = 0f;
 
+        // Reiniciar después del tiempo indicado.
         StartCoroutine(RestartAfterDelay());
     }
 
     private IEnumerator RestartAfterDelay()
     {
-        yield return new WaitForSecondsRealtime(restartDelay);
+        // Realtime permite esperar aunque
+        // Time.timeScale sea 0.
+        yield return new WaitForSecondsRealtime(
+            restartDelay
+        );
 
         Time.timeScale = 1f;
 
