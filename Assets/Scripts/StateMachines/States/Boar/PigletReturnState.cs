@@ -51,7 +51,7 @@ public class PigletReturnState : State
             returnTargetPoint = patrolState.GetNearestPatrolPoint();
             hasDestination = true;
 
-            if (pathAgent != null && pathAgent.isActiveAndEnabled)
+            if (CanUsePathfinding())
             {
                 pathAgent.SetDestination(returnTargetPoint);
             }
@@ -75,12 +75,21 @@ public class PigletReturnState : State
         Vector3 diff = returnTargetPoint - myPos;
         diff.y = 0f;
 
-        if (pathAgent != null && pathAgent.isActiveAndEnabled)
+        if (CanUsePathfinding())
         {
             return diff.magnitude <= arrivalDistance || pathAgent.HasReachedDestination();
         }
 
         return diff.magnitude <= arrivalDistance;
+    }
+
+    private bool CanUsePathfinding()
+    {
+        return pathAgent != null &&
+               pathAgent.isActiveAndEnabled &&
+               pathAgent.gridManager != null &&
+               pathAgent.gridManager.Grid != null &&
+               pathAgent.pathfinding != null;
     }
 
     public override void OnExit()
