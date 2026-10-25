@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4711281031618570260}
   - component: {fileID: 4298736614274210499}
-  - component: {fileID: 1207447123737662048}
+  - component: {fileID: 6923166439825054824}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -130,7 +130,7 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!114 &1207447123737662048
+--- !u!114 &6923166439825054824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,6 +239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9d0fc95681df347a91dee5dfcfb712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BananaPickup
+  pickupSound: {fileID: 8300000, guid: 659c8679bfd1b314ab0480dc2a7b4e10, type: 3}
+  pickupVolume: 0.772
 --- !u!114 &4456849322993433037
 MonoBehaviour:
   m_ObjectHideFlags: 0

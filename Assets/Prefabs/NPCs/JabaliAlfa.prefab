@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 4555904958538629084}
   - component: {fileID: 8671889529758513479}
   - component: {fileID: 1872456975751171342}
+  - component: {fileID: 2048628343569792863}
   m_Layer: 0
   m_Name: PatrolState
   m_TagString: Untagged
@@ -143,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BoarPatrolState
   transitions:
   - {fileID: 1872456975751171342}
+  - {fileID: 2048628343569792863}
   movementScripts:
   - {fileID: 1260094285658352227}
   patrolCenter: {fileID: 0}
@@ -164,6 +166,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4578ec251566d458a598551619145e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Transition_Vision
+  stateMachine: {fileID: 0}
+  targetState: {fileID: 4979160324566046523}
+--- !u!114 &2048628343569792863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181539414497299572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c6082cf809b684aa46bab2d7557752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_Hearing
   stateMachine: {fileID: 0}
   targetState: {fileID: 4979160324566046523}
 --- !u!1 &3823489023542583161
@@ -257,6 +273,7 @@ GameObject:
   - component: {fileID: 8121304038984986811}
   - component: {fileID: 8273730473467202258}
   - component: {fileID: 6620540750496870803}
+  - component: {fileID: 3057682013761254204}
   m_Layer: 0
   m_Name: JabaliAlfa
   m_TagString: Untagged
@@ -506,6 +523,18 @@ MonoBehaviour:
   pathLookTarget: {fileID: 2687491923252417886}
   waypointReachedDistance: 0.4
   pathRefreshInterval: 0.35
+--- !u!114 &3057682013761254204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4147362801305083882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a848a47c3bb689b4a928ea5de2b444d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HearingSense_Boar
 --- !u!1 &6760035655551964960
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -37,13 +38,17 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerEnergy = GetComponent<PlayerEnergy>();
 
-        // El juego no tiene movimiento vertical.
+        // El jugador utiliza físicas para colisionar.
+        rb.isKinematic = false;
+
+        // No utilizamos gravedad ni movimiento vertical.
         rb.useGravity = false;
 
+        // Bloqueamos el movimiento vertical y los giros
+        // producidos por las físicas.
         rb.constraints =
             RigidbodyConstraints.FreezePositionY |
-            RigidbodyConstraints.FreezeRotationX |
-            RigidbodyConstraints.FreezeRotationZ;
+            RigidbodyConstraints.FreezeRotation;
     }
 
     private void Update()
@@ -61,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetMovementInput(Vector2 input)
     {
-        // Evita aumentar la velocidad al moverse en diagonal.
+        // Evita aumentar la velocidad en diagonal.
         movementInput = Vector2.ClampMagnitude(input, 1f);
     }
 
@@ -74,21 +79,23 @@ public class PlayerMovement : MonoBehaviour
         );
 
         if (direction.sqrMagnitude < 0.001f)
+        {
+            // Detener el movimiento cuando no hay input.
+            rb.linearVelocity = Vector3.zero;
             return;
+        }
 
-        // Energía 100% -> velocidad máxima.
-        // Energía 0%   -> velocidad mínima.
+        // La velocidad depende de la energía.
         float currentSpeed = Mathf.Lerp(
             minMoveSpeed,
             maxMoveSpeed,
             playerEnergy.NormalizedEnergy
         );
 
-        Vector3 movement =
-            direction * currentSpeed * Time.fixedDeltaTime;
+        // Movimiento mediante velocidad física.
+        rb.linearVelocity = direction * currentSpeed;
 
-        rb.MovePosition(rb.position + movement);
-
+        // Girar hacia la dirección del movimiento.
         Quaternion targetRotation =
             Quaternion.LookRotation(direction, Vector3.up);
 
@@ -99,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
                 rotationSpeed * Time.fixedDeltaTime
             );
 
+        // El giro lo controla el código, no los impactos.
         rb.MoveRotation(newRotation);
     }
 }

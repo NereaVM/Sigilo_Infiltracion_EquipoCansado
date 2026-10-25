@@ -22,8 +22,11 @@ public class IntroOverlayController : MonoBehaviour
     [SerializeField]
     private PauseMenu pauseMenu;
 
-    [SerializeField] 
+    [SerializeField]
     private GameObject energyBar;
+
+    [SerializeField]
+    private GameObject blackBackground;
 
     [Header("Timing")]
     [SerializeField] private float holdDuration = 0.25f;
@@ -47,6 +50,9 @@ public class IntroOverlayController : MonoBehaviour
             if (energyBar != null)
                 energyBar.SetActive(true);
 
+            if (blackBackground != null)
+                blackBackground.SetActive(false);
+
             gameObject.SetActive(false);
             return;
         }
@@ -54,22 +60,21 @@ public class IntroOverlayController : MonoBehaviour
         hasPlayedThisSession = true;
 
         if (pauseMenu != null)
-        {
             pauseMenu.SetPauseAllowed(false);
-        }
 
         if (energyBar != null)
             energyBar.SetActive(false);
 
+        // Mostramos el fondo negro durante la intro.
+        if (blackBackground != null)
+            blackBackground.SetActive(true);
+
         if (canvasGroup == null)
-        {
             canvasGroup = GetComponent<CanvasGroup>();
-        }
 
         if (sneakyMonkeyLogo != null)
         {
-            sneakyOriginalScale =
-                sneakyMonkeyLogo.localScale;
+            sneakyOriginalScale = sneakyMonkeyLogo.localScale;
 
             sneakyMonkeyLogo.localScale =
                 sneakyOriginalScale * startScale;
@@ -77,8 +82,7 @@ public class IntroOverlayController : MonoBehaviour
 
         if (teamLogo != null)
         {
-            teamOriginalScale =
-                teamLogo.localScale;
+            teamOriginalScale = teamLogo.localScale;
 
             teamLogo.localScale =
                 teamOriginalScale * startScale;
@@ -86,17 +90,14 @@ public class IntroOverlayController : MonoBehaviour
 
         if (ujiLogo != null)
         {
-            ujiOriginalScale =
-                ujiLogo.localScale;
+            ujiOriginalScale = ujiLogo.localScale;
 
             ujiLogo.localScale =
                 ujiOriginalScale * startScale;
         }
 
         if (canvasGroup != null)
-        {
             canvasGroup.alpha = 1f;
-        }
 
         StartCoroutine(PlayIntro());
     }
@@ -125,9 +126,7 @@ public class IntroOverlayController : MonoBehaviour
             );
 
             if (canvasGroup != null)
-            {
                 canvasGroup.alpha = 1f - t;
-            }
 
             if (sneakyMonkeyLogo != null)
             {
@@ -170,6 +169,9 @@ public class IntroOverlayController : MonoBehaviour
 
         if (energyBar != null)
             energyBar.SetActive(true);
+
+        if (blackBackground != null)
+            blackBackground.SetActive(false);
 
         gameObject.SetActive(false);
     }
