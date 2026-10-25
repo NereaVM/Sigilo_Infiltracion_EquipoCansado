@@ -42,6 +42,14 @@ public abstract class Transition : MonoBehaviour
     public virtual void TransitionAction(){}
     public void _TransitionAction()
     {
+        if (targetState == null)
+        {
+            throw new System.Exception(
+                $"Transition {GetType().Name} on {gameObject.name} " +
+                "has no target state assigned."
+            );
+        }
+
         targetState.SetStateMachine(stateMachine);
         TransitionAction();
     }

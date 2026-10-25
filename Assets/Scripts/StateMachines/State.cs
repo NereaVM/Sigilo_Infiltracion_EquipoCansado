@@ -25,9 +25,17 @@ public abstract class State : MonoBehaviour
     private void Awake()
     {
         // Disable all of the movement scripts on this state, as they should only be enabled when the state is active.
+        if (movementScripts == null)
+        {
+            return;
+        }
+
         foreach (var movementScript in movementScripts)
         {
-            movementScript.enabled = false;
+            if (movementScript != null)
+            {
+                movementScript.enabled = false;
+            }
         }
     }
 

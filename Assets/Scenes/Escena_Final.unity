@@ -11692,6 +11692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Transition_Vision
   stateMachine: {fileID: 0}
   targetState: {fileID: 1683126272}
+  onlyPlayer: 0
 --- !u!1 &1034135491
 GameObject:
   m_ObjectHideFlags: 0
@@ -12853,6 +12854,17 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1098343892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 762518181758798204, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+  m_PrefabInstance: {fileID: 8349561115506361267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc75a4a92ddf3ae4f9c93c1237fbc40b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrocodilePursuitState
 --- !u!1001 &1101205241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16193,6 +16205,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
   m_PrefabInstance: {fileID: 8349561115506361267}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1423027815 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 6715942237335859010, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+  m_PrefabInstance: {fileID: 8349561115506361267}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1431102855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17815,9 +17832,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cocodrilo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2129797508176210038, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: arriveDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129797508176210038, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: slowingDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200788146723718140, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: panSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.8
+      value: -18.83
       objectReference: {fileID: 0}
     - target: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17825,7 +17854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.0000005
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17856,6 +17885,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3487257648838789445, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487257648838789445, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 626891200}
@@ -17867,6 +17900,18 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 776849042}
+    - target: {fileID: 8487829673051904902, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: gridManager
+      value: 
+      objectReference: {fileID: 1349570005}
+    - target: {fileID: 8487829673051904902, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: pathfinding
+      value: 
+      objectReference: {fileID: 1349570007}
+    - target: {fileID: 8583615921452337157, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18451,6 +18496,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5437907961275780737, guid: c95b88470e0df754fa7cca1445478986, type: 3}
+      propertyPath: energyConsumptionPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6679593341578530936, guid: c95b88470e0df754fa7cca1445478986, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.2
@@ -25581,9 +25630,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cocodrilo
       objectReference: {fileID: 0}
+    - target: {fileID: 1876707327207788839, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: targetState
+      value: 
+      objectReference: {fileID: 1098343892}
+    - target: {fileID: 2200788146723718140, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: panSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.2
+      value: -19.09
       objectReference: {fileID: 0}
     - target: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25591,7 +25648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.2
+      value: -6.79
       objectReference: {fileID: 0}
     - target: {fileID: 3141849245992251301, guid: e4df98a71d50981449676ace581b8dea, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25629,10 +25686,26 @@ PrefabInstance:
       propertyPath: defeatPanel
       value: 
       objectReference: {fileID: 2028437905}
-    - target: {fileID: 8212996278015968731, guid: e4df98a71d50981449676ace581b8dea, type: 3}
-      propertyPath: target
+    - target: {fileID: 4307853697714592834, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 776849042}
+      objectReference: {fileID: 626891200}
+    - target: {fileID: 4307853697714592834, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: defeatPanel
+      value: 
+      objectReference: {fileID: 2028437905}
+    - target: {fileID: 5642222064035584498, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1423027815}
+    - target: {fileID: 8487829673051904902, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: gridManager
+      value: 
+      objectReference: {fileID: 1349570005}
+    - target: {fileID: 8487829673051904902, guid: e4df98a71d50981449676ace581b8dea, type: 3}
+      propertyPath: pathfinding
+      value: 
+      objectReference: {fileID: 1349570007}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

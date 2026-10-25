@@ -31,6 +31,9 @@ public class EnemyPathAgent : MonoBehaviour
 
     private MovementSystemController movementController;
 
+    public bool HasPath { get; private set; }
+    public bool PathCalculationFailed { get; private set; }
+
     private void Awake()
     {
         movementController = GetComponent<MovementSystemController>();
@@ -71,6 +74,8 @@ public class EnemyPathAgent : MonoBehaviour
         currentPath.Clear();
         currentWaypointIndex = 0;
         lastTargetNode = null;
+        HasPath = false;
+        PathCalculationFailed = false;
     }
 
     public bool HasReachedDestination()
@@ -162,6 +167,8 @@ public class EnemyPathAgent : MonoBehaviour
     {
         currentPath.Clear();
         currentWaypointIndex = 0;
+        HasPath = false;
+        PathCalculationFailed = false;
 
         GridNode startNode =
             gridManager.GetNodeFromWorldPosition(transform.position);
@@ -170,10 +177,16 @@ public class EnemyPathAgent : MonoBehaviour
             gridManager.GetNodeFromWorldPosition(destination);
 
         if (startNode == null || targetNode == null)
+        {
+            PathCalculationFailed = true;
             return;
+        }
 
         if (!startNode.isWalkable || !targetNode.isWalkable)
+        {
+            PathCalculationFailed = true;
             return;
+        }
 
         List<GridNode> newPath =
             pathfinding.FindPath(startNode, targetNode);
@@ -182,6 +195,11 @@ public class EnemyPathAgent : MonoBehaviour
         {
             currentPath = newPath;
             currentWaypointIndex = 1;
+            HasPath = true;
+        }
+        else
+        {
+            PathCalculationFailed = true;
         }
     }
 
