@@ -22,19 +22,30 @@ public class MovementSystemController : MonoBehaviour
 
     private void DisableMovementScript(MovementScript movementScript)
     {
-
         if (activeMovementScripts.Contains(movementScript))
         {
             activeMovementScripts.Remove(movementScript);
+        }
+
+        if (movementScript != null)
+        {
+            movementScript.enabled = false;
         }
     }
 
     private void EnableMovementScript(MovementScript movementScript)
     {
+        if (movementScript == null)
+        {
+            return;
+        }
+
         if (!activeMovementScripts.Contains(movementScript))
         {
             activeMovementScripts.Add(movementScript);
         }
+
+        movementScript.enabled = true;
     }
 
     /// <summary>
@@ -44,13 +55,24 @@ public class MovementSystemController : MonoBehaviour
     /// <param name="movementScripts"></param>
     public void ChangeToMovementScripts(MovementScript[] movementScripts)
     {
+        movementScripts = movementScripts ?? System.Array.Empty<MovementScript>();
+
         // Disables the scripts not in the new array
         foreach (var activeScript in new List<MovementScript>(activeMovementScripts))
         {
+            if (activeScript == null)
+            {
+                activeMovementScripts.Remove(activeScript);
+                continue;
+            }
+
             bool isInNewList = false;
             foreach (MovementScript newScript in movementScripts)        
             {
-                if (activeScript == newScript) isInNewList = true;
+                if (newScript != null && activeScript == newScript)
+                {
+                    isInNewList = true;
+                }
             }
             if (!isInNewList) DisableMovementScript(activeScript);
         }
@@ -58,12 +80,20 @@ public class MovementSystemController : MonoBehaviour
         // Enables the scripts in the new array that aren't already active.
         foreach (var newScript in movementScripts)
         {
-            if (!activeMovementScripts.Contains(newScript)) EnableMovementScript(newScript);
+            if (newScript != null &&
+                !activeMovementScripts.Contains(newScript))
+            {
+                EnableMovementScript(newScript);
+            }
         }
 
-        foreach (var movementScript in activeMovementScripts)
+        foreach (var movementScript in
+                 new List<MovementScript>(activeMovementScripts))
         {
-            movementScript.targetTransform = currentTargetTransform;
+            if (movementScript != null)
+            {
+                movementScript.targetTransform = currentTargetTransform;
+            }
         }
     }
 
@@ -85,6 +115,11 @@ public class MovementSystemController : MonoBehaviour
     {
         foreach (var movementScript in activeMovementScripts)
         {
+            if (movementScript == null)
+            {
+                continue;
+            }
+
             if (currentTargetTransform != null)
             {
                 currentTargetPosition = currentTargetTransform.position;
