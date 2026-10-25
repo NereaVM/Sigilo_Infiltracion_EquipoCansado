@@ -1,12 +1,12 @@
-
 using UnityEngine;
 
 /// <summary>
-/// Estado de Alerta del Jabato según la propuesta técnica:
+/// Estado de Alerta del Jabato:
 /// - Condición: Contacto visual con el jugador.
 /// - Acción:
 ///   1. Hace un ruido de alerta para el alfa.
-///   2. Movimiento hacia el jugador manteniendo distancia.
+///   2. Reproduce el sonido audible del jabato.
+///   3. Movimiento hacia el jugador manteniendo distancia.
 /// - Cono de visión activado.
 /// - Oído desactivado.
 /// - Salida: Perder contacto visual durante un tiempo.
@@ -17,9 +17,15 @@ public class PigletAlertState : State
     [Tooltip("El jugador a vigilar.")]
     [SerializeField] private Transform target;
 
-    [Header("Sonido de Alerta")]
+    [Header("Sonido de Alerta - IA")]
     [Tooltip("Prefab del sonido emitido para avisar al Jabalí Alfa.")]
     [SerializeField] private GeneratedSound alertSoundPrefab;
+
+    [Header("Sonido de Alerta - Audio")]
+    [SerializeField] private AudioClip alertAudioClip;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float alertVolume = 1f;
 
     [Header("Distancia y Velocidad")]
     [Tooltip("Distancia de respeto para no chocar con el jugador.")]
@@ -32,7 +38,6 @@ public class PigletAlertState : State
     private MovementSystemController movementController;
     private KinematicMovement kinematicMovement;
 
-    // Nombre cambiado para evitar conflicto con State.cs
     private HearingSense pigletHearingSense;
 
     private float previousSpeed;
@@ -40,7 +45,9 @@ public class PigletAlertState : State
 
     public override void OnEntry()
     {
-        Debug.Log("[PigletAlertState] ¡Jabato en ALERTA! Avisando al alfa.");
+        Debug.Log(
+            "[PigletAlertState] ¡Jabato en ALERTA! Avisando al alfa."
+        );
 
         movementController =
             GetComponentInParent<MovementSystemController>();
@@ -60,22 +67,40 @@ public class PigletAlertState : State
             pigletHearingSense.enabled = false;
         }
 
-        // 2. Emitir sonido de alerta.
+        Vector3 alertPosition =
+            transform.parent != null
+                ? transform.parent.position
+                : transform.position;
+
+        // 2. Sonido lógico de IA.
+        // Este es el que puede escuchar el Jabalí Alfa
+        // si se encuentra dentro del radio correspondiente.
         if (alertSoundPrefab != null)
         {
-            GeneratedSound soundInstance = Instantiate(
-                alertSoundPrefab,
-                transform.parent != null
-                    ? transform.parent.position
-                    : transform.position,
-                Quaternion.identity
-            );
+            GeneratedSound soundInstance =
+                Instantiate(
+                    alertSoundPrefab,
+                    alertPosition,
+                    Quaternion.identity
+                );
 
-            // Evitar que el emisor se alerte a sí mismo.
-            soundInstance.soundGenerator = pigletHearingSense;
+            // Evitar que el propio jabato
+            // escuche su alerta.
+            soundInstance.soundGenerator =
+                pigletHearingSense;
         }
 
-        // 3. Ajustar velocidad de persecución.
+        // 3. Sonido real para el jugador.
+        if (alertAudioClip != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                alertAudioClip,
+                alertPosition,
+                alertVolume
+            );
+        }
+
+        // 4. Ajustar velocidad de persecución.
         if (kinematicMovement != null)
         {
             previousSpeed = kinematicMovement.speed;
@@ -88,7 +113,7 @@ public class PigletAlertState : State
             movementController.currentTargetTransform = null;
         }
 
-        // 4. Buscar al jugador.
+        // 5. Buscar al jugador.
         if (target == null)
         {
             GameObject playerObj =
@@ -102,7 +127,7 @@ public class PigletAlertState : State
 
         isHoldingDistance = false;
 
-        // 5. Iniciar persecución mediante A*.
+        // 6. Iniciar persecución mediante A*.
         if (target != null &&
             pathAgent != null &&
             pathAgent.isActiveAndEnabled)
@@ -122,7 +147,8 @@ public class PigletAlertState : State
                 : transform;
 
         Vector3 toPlayer =
-            target.position - rootTransform.position;
+            target.position -
+            rootTransform.position;
 
         toPlayer.y = 0f;
 
@@ -165,7 +191,8 @@ public class PigletAlertState : State
         }
         else if (dist > keepDistance + 0.4f)
         {
-            // El jugador se aleja: reanudar persecución.
+            // El jugador se aleja:
+            // reanudar persecución.
             if (isHoldingDistance)
             {
                 isHoldingDistance = false;

@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 586423522970504032, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
+      propertyPath: m_Name
+      value: AlertState
+      objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.45
+      value: 15.31
       objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.76
+      value: -1.44
       objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999921
       objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalRotation.x
@@ -30,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.0039812024
       objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalRotation.z
@@ -42,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.456
       objectReference: {fileID: 0}
     - target: {fileID: 6015543071577089732, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -60,6 +64,10 @@ PrefabInstance:
       propertyPath: waypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7337107003115862012, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
+      propertyPath: alertAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 878ea1a7c36f5ee499cdf266485db146, type: 3}
     - target: {fileID: 8186879872736670738, guid: 3dcb7ba0acd67f54997eb4c597eb2f08, type: 3}
       propertyPath: m_Constraints
       value: 116
