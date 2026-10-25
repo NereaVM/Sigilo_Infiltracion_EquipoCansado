@@ -16,7 +16,7 @@ public class Transition_LostVision : Transition
             return false;
         }
 
-        if (visionSense.hasSeenEntity)
+        if (visionSense.hasSeenPlayer)
         {
             timeWithoutSeeing = 0f;
             return false;

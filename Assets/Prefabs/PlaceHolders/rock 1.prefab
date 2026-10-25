@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7316193809425374546}
   - component: {fileID: 4305706245712918684}
   - component: {fileID: 3852056654382601839}
+  - component: {fileID: 557438465191116784}
   m_Layer: 6
   m_Name: rock 1
   m_TagString: Untagged
@@ -132,6 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1a0c8edde487d42af890fbe65cea62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grabbable
+  freezeWhenResting: 1
+  minimumFlightTime: 0.5
 --- !u!65 &3852056654382601839
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -147,9 +150,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 5.1030817, y: 4.487337, z: 4.9551325}
   m_Center: {x: -0.23394299, y: 1.0287844, z: 0.115578696}
+--- !u!114 &557438465191116784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694595272260437609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132564730ae78c84d94162133bdd76e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RockImpactSound
+  soundPrefab: {fileID: 1336188211694310265, guid: dffa46e5d5f1fde4ea76b61af49b85bb, type: 3}
+  minImpactSpeed: 1.5
+  impactLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295

@@ -68,7 +68,12 @@ public class Launcher : MonoBehaviour
     private void TryPickUp()
     {
         Collider[] hits =
-            Physics.OverlapSphere(transform.position, pickupRange);
+            Physics.OverlapSphere(
+                transform.position,
+                pickupRange,
+                ~0,
+                QueryTriggerInteraction.Collide
+            );
 
         Grabbable closest = null;
         float closestDist = float.MaxValue;

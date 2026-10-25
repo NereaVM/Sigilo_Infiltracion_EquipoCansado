@@ -13,6 +13,15 @@ public class BoarPursuitState : State
     {
         Debug.Log("Boar entered Pursuit state.");
 
+        GetComponentInParent<HearingSense_Boar>()?.ResetHearing();
+
+        if (target == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+                target = player.transform;
+        }
+
         foreach (MovementScript movementScript in movementScripts)
         {
             if (movementScript != null)
@@ -35,6 +44,9 @@ public class BoarPursuitState : State
         usingPathfinding =
             pathAgent != null &&
             pathAgent.isActiveAndEnabled &&
+            pathAgent.gridManager != null &&
+            pathAgent.gridManager.Grid != null &&
+            pathAgent.pathfinding != null &&
             movementController != null &&
             target != null;
 

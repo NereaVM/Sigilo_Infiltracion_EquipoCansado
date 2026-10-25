@@ -14,6 +14,7 @@ public class VisionSense : MonoBehaviour
     [SerializeField] private LayerMask detectionMask = ~0;
 
     public bool hasSeenEntity { get; private set; }
+    public bool hasSeenPlayer { get; private set; }
     public Vector3 lastSeenPosition { get; private set; }
     public VisibleEntity lastSeenEntity { get; private set; }
 
@@ -27,6 +28,7 @@ public class VisionSense : MonoBehaviour
         // Vision is recalculated every frame.
         // If nothing is visible this frame, hasSeenEntity stays false.
         hasSeenEntity = false;
+        hasSeenPlayer = false;
 
         Vector3 origin = GetVisionOrigin();
 
@@ -153,6 +155,11 @@ public class VisionSense : MonoBehaviour
                 closestDistance = distanceToTarget;
                 closestVisibleEntity = visibleEntity;
             }
+
+            if (visibleEntity.transform.root.CompareTag("Player"))
+            {
+                hasSeenPlayer = true;
+            }
         }
 
         if (closestVisibleEntity != null)
@@ -193,6 +200,7 @@ public class VisionSense : MonoBehaviour
     public void ResetVision()
     {
         hasSeenEntity = false;
+        hasSeenPlayer = false;
         lastSeenEntity = null;
     }
 

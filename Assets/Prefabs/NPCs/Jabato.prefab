@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PigletPatrolState
   transitions:
   - {fileID: 2013499478853527821}
+  - {fileID: 742100000000000006}
   movementScripts:
   - {fileID: 3585783060775954928}
   patrolMode: 1
@@ -217,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PigletReturnState
   transitions:
   - {fileID: 5268303019992788647}
+  - {fileID: 742100000000000007}
   movementScripts:
   - {fileID: 3585783060775954928}
   patrolState: {fileID: 6932063708129804072}
@@ -268,8 +270,120 @@ Transform:
   - {fileID: 3757101455341435342}
   - {fileID: 2431793836488566831}
   - {fileID: 340986829383159868}
+  - {fileID: 742100000000000002}
   m_Father: {fileID: 6015543071577089732}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &742100000000000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 742100000000000002}
+  - component: {fileID: 742100000000000003}
+  - component: {fileID: 742100000000000004}
+  - component: {fileID: 742100000000000005}
+  m_Layer: 0
+  m_Name: InvestigateState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &742100000000000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742100000000000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6880264152574951695}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &742100000000000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742100000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19e1f03b017e264e82899587729e3cb, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PigletInvestigateState
+  transitions:
+  - {fileID: 742100000000000004}
+  - {fileID: 742100000000000005}
+  movementScripts:
+  - {fileID: 3585783060775954928}
+  investigateSpeed: 1.6
+  waitAtPointDuration: 3
+  maxDistanceFromPatrol: 12
+  patrolState: {fileID: 6932063708129804072}
+--- !u!114 &742100000000000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742100000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4578ec251566d458a598551619145e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_Vision
+  stateMachine: {fileID: 8168654825483393901}
+  targetState: {fileID: 7337107003115862012}
+--- !u!114 &742100000000000005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742100000000000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070dbaa07a2edee42ae2613536c50a38, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_PigletInvestigationDone
+  stateMachine: {fileID: 8168654825483393901}
+  targetState: {fileID: 5655997095218067179}
+--- !u!114 &742100000000000006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215768691464356716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c6082cf809b684aa46bab2d7557752, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_Hearing
+  stateMachine: {fileID: 8168654825483393901}
+  targetState: {fileID: 742100000000000003}
+--- !u!114 &742100000000000007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021247574352590629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c6082cf809b684aa46bab2d7557752, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_Hearing
+  stateMachine: {fileID: 8168654825483393901}
+  targetState: {fileID: 742100000000000003}
 --- !u!1 &5450818066941781341
 GameObject:
   m_ObjectHideFlags: 0

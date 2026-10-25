@@ -94,6 +94,7 @@ Transform:
   - {fileID: 4555904958538629084}
   - {fileID: 3840447378730715281}
   - {fileID: 6580681306106487904}
+  - {fileID: 8437916240581100002}
   m_Father: {fileID: 2943087884764718473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3181539414497299572
@@ -108,6 +109,7 @@ GameObject:
   - component: {fileID: 8671889529758513479}
   - component: {fileID: 1872456975751171342}
   - component: {fileID: 2048628343569792863}
+  - component: {fileID: 8437916240581100004}
   m_Layer: 0
   m_Name: PatrolState
   m_TagString: Untagged
@@ -143,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoarPatrolState
   transitions:
+  - {fileID: 8437916240581100004}
   - {fileID: 1872456975751171342}
   - {fileID: 2048628343569792863}
   movementScripts:
@@ -168,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Transition_Vision
   stateMachine: {fileID: 0}
   targetState: {fileID: 4979160324566046523}
+  onlyPlayer: 1
 --- !u!114 &2048628343569792863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +186,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Transition_Hearing
   stateMachine: {fileID: 0}
   targetState: {fileID: 4979160324566046523}
+--- !u!114 &8437916240581100004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181539414497299572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c6082cf809b684aa46bab2d7557752, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_Hearing
+  stateMachine: {fileID: 0}
+  targetState: {fileID: 8437916240581100003}
+  onlyOwlAlert: 1
 --- !u!1 &3823489023542583161
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8257645111830992394
 Transform:
   m_ObjectHideFlags: 0
@@ -669,6 +688,91 @@ MonoBehaviour:
   targetState: {fileID: 8671889529758513479}
   target: {fileID: 0}
   targetRadius: 1.2
+--- !u!1 &8437916240581100001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8437916240581100002}
+  - component: {fileID: 8437916240581100003}
+  - component: {fileID: 8437916240581100005}
+  - component: {fileID: 8437916240581100006}
+  - component: {fileID: 8437916240581100007}
+  m_Layer: 0
+  m_Name: InvestigateOwlAlertState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8437916240581100002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437916240581100001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5001629348006411251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8437916240581100003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437916240581100001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf0f3b2b74542bfad45daecf40841c3, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::BoarInvestigateSoundState
+  transitions:
+  - {fileID: 8437916240581100005}
+  - {fileID: 8437916240581100006}
+  movementScripts:
+  - {fileID: 5299651550562799040}
+  - {fileID: 6300262015875821241}
+  arrivalDistance: 0.8
+  inspectionDuration: 3
+  stuckTimeout: 2
+--- !u!114 &8437916240581100005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437916240581100001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4578ec251566d458a598551619145e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_Vision
+  stateMachine: {fileID: 0}
+  targetState: {fileID: 4979160324566046523}
+  onlyPlayer: 1
+--- !u!114 &8437916240581100006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437916240581100001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ac920f29ba4852b51052f79c46e917, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Transition_BoarInvestigationFinished
+  stateMachine: {fileID: 0}
+  targetState: {fileID: 8671889529758513479}
 --- !u!1001 &5966226970797360411
 PrefabInstance:
   m_ObjectHideFlags: 0

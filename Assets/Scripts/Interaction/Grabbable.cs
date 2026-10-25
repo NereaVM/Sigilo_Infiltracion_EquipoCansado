@@ -30,6 +30,7 @@ public class Grabbable : MonoBehaviour
         {
             rb.isKinematic = true;
             rb.useGravity = false;
+            col.isTrigger = true;
         }
     }
 
@@ -54,6 +55,7 @@ public class Grabbable : MonoBehaviour
             // Volver a dejar la piedra fija.
             rb.isKinematic = true;
             rb.useGravity = false;
+            col.isTrigger = true;
 
             // Restaurar colisiones con el jugador.
             RestorePlayerCollisions();
@@ -117,6 +119,7 @@ public class Grabbable : MonoBehaviour
         // Recuperar colisiones.
         if (col != null)
         {
+            col.isTrigger = false;
             col.enabled = true;
 
             ignoredPlayerColliders = playerColliders;
