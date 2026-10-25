@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Transition_Hearing : Transition
 {
+    [SerializeField] private bool onlyOwlAlert;
+
     HearingSense hearingSense;
     public override bool IsTriggered()
     {
@@ -13,7 +15,9 @@ public class Transition_Hearing : Transition
             return false;
         }
 
-        return hearingSense.hasHeardSound;
+        return hearingSense.hasHeardSound &&
+               (!onlyOwlAlert ||
+                     hearingSense.lastSoundType == HearingSystem.SoundType.OwlAlert);
     }
 
     public override void TransitionAction()

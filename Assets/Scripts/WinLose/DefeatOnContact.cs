@@ -14,22 +14,16 @@ public class DefeatOnContact : MonoBehaviour
 
     private bool defeated = false;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         if (defeated)
             return;
 
-        // Comprobar si hemos tocado un animal
-        // que utiliza la máquina de estados.
-        StateMachine enemy =
-            collision.collider.GetComponentInParent<StateMachine>();
-
-        if (enemy == null)
+        if (!other.CompareTag("Player"))
             return;
 
         Debug.Log(
-            "[DEFEAT] El jugador ha tocado a: " +
-            enemy.gameObject.name
+            "[DEFEAT] El jugador ha tocado al Jabalí Alfa."
         );
 
         TriggerDefeat();

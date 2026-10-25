@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Transition_Vision : Transition
 {
+    [SerializeField] private bool onlyPlayer;
+
     VisionSense visionSense;
     public override bool IsTriggered()
     {
@@ -13,7 +15,9 @@ public class Transition_Vision : Transition
             return false;
         }
 
-        return visionSense.hasSeenEntity;
+        return onlyPlayer
+            ? visionSense.hasSeenPlayer
+            : visionSense.hasSeenEntity;
     }
 
     public override void TransitionAction()
