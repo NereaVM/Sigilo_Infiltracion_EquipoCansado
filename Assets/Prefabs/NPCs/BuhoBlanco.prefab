@@ -469,7 +469,7 @@ Transform:
   m_GameObject: {fileID: 6026063384094521893}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0000012, y: -1.475, z: 2.6000018}
+  m_LocalPosition: {x: -0.20000076, y: -1.475, z: 2.8000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -527,6 +527,8 @@ MonoBehaviour:
   owlHearingSense: {fileID: 5370055644521908519}
   visionPivot: {fileID: 6242874682726377768}
   alertSoundPrefab: {fileID: 2060549050020367009, guid: c1f247d8e2fd5d54ab1dc57119fd53b6, type: 3}
+  alertAudioClip: {fileID: 8300000, guid: a31cba92642e6084f8ede11ceef11b35, type: 3}
+  alertVolume: 1
   rotationSpeed: 120
 --- !u!114 &6221470144557143700
 MonoBehaviour:

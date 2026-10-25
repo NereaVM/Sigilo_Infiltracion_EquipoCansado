@@ -7,14 +7,21 @@ public class OwlAlertState : State
     [SerializeField] private HearingSense_Owl owlHearingSense;
     [SerializeField] private Transform visionPivot;
 
-    [Header("Alert Sound")]
+    [Header("Alert Sound - AI")]
     [SerializeField] private GeneratedSound alertSoundPrefab;
+
+    [Header("Alert Sound - Audio")]
+    [SerializeField] private AudioClip alertAudioClip;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float alertVolume = 1f;
 
     [Header("Vision Tracking")]
     [SerializeField] private float rotationSpeed = 120f;
 
     public override void OnEntry()
     {
+        // Reiniciar temporizadores del estado.
         foreach (Transition transition in transitions)
         {
             if (transition is Transition_Timer timer)
@@ -23,6 +30,7 @@ public class OwlAlertState : State
             }
         }
 
+        // Sonido lógico para la IA.
         if (alertSoundPrefab != null)
         {
             GeneratedSound alertSound =
@@ -32,7 +40,19 @@ public class OwlAlertState : State
                     Quaternion.identity
                 );
 
+            // Evita que el búho escuche su propia alerta.
             alertSound.soundGenerator = owlHearingSense;
+        }
+
+        // Sonido real para el jugador.
+        // Se reproduce una sola vez al entrar en Alert.
+        if (alertAudioClip != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                alertAudioClip,
+                transform.root.position,
+                alertVolume
+            );
         }
     }
 
